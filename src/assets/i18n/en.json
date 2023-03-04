@@ -41,15 +41,18 @@
   },
   "nav": {
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "settings": {
+      "language": "Language",
+      "admin": "Admin settings"
+    }
   },
   "errors": {
     "dialog": {
       "server": {
         "title": "Server error",
         "content": "Our servers are down, please try logging in later"
-      },
-      "failed_login": "Login Failed"
+      }
     }
   },
   "server": {

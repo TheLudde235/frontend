@@ -1,0 +1,63 @@
+{
+  "page": {
+    "register": {
+      "occupied_username": "Användarnamnet är upptaget",
+      "admin": "Registrera administratör",
+      "email": "E-post",
+      "valid_email": "Måste vara giltig e-postadress",
+      "required_email": "E-post krävs",
+      "unique_email": "E-posten är upptagen",
+      "confirm_password": "Bekräfta lösenord",
+      "errors": {
+        "different_password": "Lösenorden är olika"
+      },
+      "register": "Registrera"
+    },
+    "login": {
+      "username": "Användarnamn",
+      "errors": {
+        "alphanumeric_username": "Användarnamn måste vara alfanumeriskt [ A-z, 0-9 ]",
+        "required_username": "Användarnamn krävs",
+        "required_password": "lösenord krävs",
+        "required_confirm_password": "Du måste ange lösenordet igen"
+      },
+      "password": "Lösenord",
+      "admin": "Admin inloggning",
+      "login": "Logga in",
+      "no_account": "Har du inget konto?",
+      "register": "Registrera",
+      "worker_Login": "Arbetarinloggning"
+    },
+    "admin": {
+      "fail_dialog": {
+        "content": "Användarnamn eller lösenord felaktigt",
+        "title": "Inloggning misslyckades"
+      }
+    },
+    "adminconfirmation": {
+      "code": "Konfirmations kod",
+      "confirm": "Skicka"
+    }
+  },
+  "errors": {
+    "dialog": {
+      "server": {
+        "title": "Serverfel",
+        "content": "Våra servrar är nere, vänligen försök senare"
+      }
+    }
+  },
+  "nav": {
+    "login": "Logga in",
+    "register": "Registrering",
+    "settings": {
+      "admin": "Administratörsinställningar",
+      "language": "Språk"
+    }
+  },
+  "server": {
+    "error": {
+      "wrong_username_or_password": "Fel användarnamn eller lösenord"
+    }
+  }
+}

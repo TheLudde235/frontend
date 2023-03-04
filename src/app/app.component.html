@@ -16,7 +16,28 @@
         <mat-icon mat-list-icon>person_add</mat-icon>
         <span>{{'nav.register' | translate}}</span>
       </a>
+      
     </mat-nav-list>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="settings-button">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>admin_panel_settings</mat-icon>
+        <span>{{'nav.settings.admin' | translate}}</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="languages">
+        <mat-icon>language</mat-icon>
+        <span>{{'nav.settings.language' | translate}}</span>
+      </button>
+    </mat-menu>
+
+    <mat-menu #languages="matMenu">
+      <button mat-menu-item (click)="_translate.use('eo')">Esperanto</button>
+      <button mat-menu-item (click)="_translate.use('en')">English</button>
+      <button mat-menu-item (click)="_translate.use('sv')">Svenska</button>
+    </mat-menu>
+
   </mat-drawer>
   <mat-drawer-content>
     <router-outlet></router-outlet>

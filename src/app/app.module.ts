@@ -25,6 +25,7 @@ import { DialogOkComponent } from './dialog-ok/dialog-ok.component';
 import {MatProgressSpinnerModule, MatSpinner} from '@angular/material/progress-spinner';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {MatMenuModule} from '@angular/material/menu';
 import { AdminconfirmationComponent } from './adminconfirmation/adminconfirmation.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -51,6 +52,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatButtonModule,
     MatSidenavModule,
     MatInputModule,
+    MatMenuModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
     FormsModule,

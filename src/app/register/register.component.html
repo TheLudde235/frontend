@@ -1,13 +1,13 @@
 <form #form='ngForm' (submit)="register()">
   <h2>{{'page.register.admin' | translate}}</h2>
   <div class="form-input">
-    <mat-form-field class="register-form-field {{usernameUnique ? 'not-occupied': ''}}" color="{{usernameUnique ? 'accent' : 'primary'}}" hintLabel="Max 30 characters">
+    <mat-form-field class="register-form-field" color="{{usernameUnique ? 'accent' : 'primary'}}" hintLabel="Max 30 characters">
       <mat-label>{{'page.login.username' | translate }}</mat-label>
       <input type="text" matInput [errorStateMatcher]="esMatcher" [formControl]="usernameFormControl" [(ngModel)]="usernameValue" (input)="validateUsername()" maxlength="30">
       <button type="button" matSuffix mat-icon-button (click)="usernameValue = ''" *ngIf="usernameValue" tabindex="-1">
         <mat-icon>clear</mat-icon>
       </button>
-      <mat-hint align="end">{{usernameValue.length}}/30</mat-hint>
+      <mat-hint [align]="'end'">{{usernameValue.length}}/30</mat-hint>
       <mat-error *ngIf="usernameFormControl.hasError('pattern') && !usernameFormControl.hasError('required')">
         {{'page.login.errors.alphanumeric_username' | translate}}
       </mat-error>
@@ -21,7 +21,7 @@
   <mat-icon class="done-icon" color="{{usernameUnique && !usernameFormControl.errors ? 'accent': 'warn'}}">{{usernameUnique && !usernameFormControl.errors ? 'done' : 'close'}}</mat-icon>
   </div>
   <div class="form-input">
-    <mat-form-field class="register-form-field {{emailUnique ? 'not-occupied': ''}}" color="{{emailUnique ? 'accent' : 'primary'}}">
+    <mat-form-field class="register-form-field" color="{{emailUnique ? 'accent' : 'primary'}}">
       <mat-label>{{'page.register.email' | translate}}</mat-label>
       <input type="text" matInput [errorStateMatcher]="esMatcher" [(ngModel)]="emailValue" [formControl]="emailFormControl" (input)="validateEmail()">
       <button type="button" matSuffix mat-icon-button (click)="emailValue = ''" *ngIf="emailValue" tabindex="-1">

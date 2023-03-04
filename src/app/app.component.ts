@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
+import { TranslateService } from '@ngx-translate/core';
 import { fromEvent, withLatestFrom, zipWith } from 'rxjs';
 
 @Component({
@@ -12,6 +13,11 @@ export class AppComponent {
 
   @ViewChild('drawer')
   public drawer!: MatDrawer;
+
+  constructor (public _translate: TranslateService) {}
+  
+
+
 
   ngAfterViewInit(): void {
   fromEvent<TouchEvent>(document, 'touchstart')

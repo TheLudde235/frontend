@@ -1,0 +1,63 @@
+{
+  "errors": {
+    "dialog": {
+      "server": {
+        "content": "Niaj serviloj malfunkcias, bonvolu provi ensaluti poste",
+        "title": "Servila eraro"
+      }
+    }
+  },
+  "nav": {
+    "login": "Ensaluti",
+    "register": "Registru",
+    "settings": {
+      "admin": "Administraj agordoj",
+      "language": "Lingvo"
+    }
+  },
+  "page": {
+    "admin": {
+      "fail_dialog": {
+        "content": "Uzantnomo aŭ pasvorto estis malĝustaj, bonvolu provi denove",
+        "title": "Ensaluto malsukcesis"
+      }
+    },
+    "adminconfirmation": {
+      "code": "Konfirma kodo",
+      "confirm": "Submeti"
+    },
+    "login": {
+      "admin": "Admin Ensaluto",
+      "errors": {
+        "alphanumeric_username": "Uzantnomo devas esti alfanombra [ A-z, 0-9 ]",
+        "required_confirm_password": "Vi devas tajpi la pasvorton denove",
+        "required_password": "Pasvorto estas postulata",
+        "required_username": "Uzantnomo estas postulata"
+      },
+      "login": "Ensaluti",
+      "no_account": "Ĉu vi ne havas konton?",
+      "password": "Pasvorto",
+      "register": "Registru",
+      "username": "Uzantnomo",
+      "worker_Login": "Ensaluto de Laboristo"
+    },
+    "register": {
+      "admin": "Registru Admin",
+      "confirm_password": "Konfirmu pasvorton",
+      "email": "Retpoŝto",
+      "errors": {
+        "different_password": "La pasvortoj estas malsamaj"
+      },
+      "occupied_username": "Uzantnomo estas okupata",
+      "register": "Registru",
+      "required_email": "Retpoŝto estas postulata",
+      "unique_email": "Retpoŝto estas okupata",
+      "valid_email": "Devas esti valida retpoŝto"
+    }
+  },
+  "server": {
+    "error": {
+      "wrong_username_or_password": "Malĝusta uzantnomo aŭ pasvorto"
+    }
+  }
+}
