@@ -1,0 +1,68 @@
+<form #form='ngForm' (submit)="register()">
+  <h2>{{'page.register.admin' | translate}}</h2>
+  <mat-form-field class="register-form-field {{usernameUnique ? 'not-occupied': ''}}" color="{{usernameUnique ? 'accent' : 'primary'}}" hintLabel="Max 30 characters">
+    <mat-label>{{'page.login.username' | translate }}</mat-label>
+    <input type="text" matInput [errorStateMatcher]="esMatcher" [formControl]="usernameFormControl" [(ngModel)]="usernameValue" (input)="validateUsername()" maxlength="30">
+    <button type="button" matSuffix mat-icon-button (click)="usernameValue = ''" *ngIf="usernameValue" tabindex="-1">
+      <mat-icon>clear</mat-icon>
+    </button>
+    <mat-hint align="end">{{usernameValue.length}}/30</mat-hint>
+
+    <mat-error *ngIf="usernameFormControl.hasError('pattern') && !usernameFormControl.hasError('required')">
+      {{'page.login.errors.alphanumeric_username' | translate}}
+    </mat-error>
+    <mat-error *ngIf="usernameFormControl.hasError('required')">
+      {{'page.login.errors.required_username' | translate}}
+    </mat-error>
+    <mat-error *ngIf="usernameFormControl.errors?.['notUnique']">
+      {{'page.register.occupied_username' | translate}}
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="register-form-field {{emailUnique ? 'not-occupied': ''}}" color="{{emailUnique ? 'accent' : 'primary'}}">
+    <mat-label>{{'page.register.email' | translate}}</mat-label>
+    <input type="text" matInput [errorStateMatcher]="esMatcher" [(ngModel)]="emailValue" [formControl]="emailFormControl" (input)="validateEmail()">
+    <button type="button" matSuffix mat-icon-button (click)="emailValue = ''" *ngIf="emailValue" tabindex="-1">
+      <mat-icon>clear</mat-icon>
+    </button>
+    <mat-error *ngIf="emailFormControl.hasError('pattern')">
+      {{'page.register.valid_email' | translate}}
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      {{'page.register.required_email' | translate}}
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.errors?.['notUnique']">
+      {{'page.register.unique_email' | translate}}
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="register-form-field {{passwordConfirmed && password1? 'confirmed' : 'pending'}}" color="{{passwordConfirmed && password1 ? 'accent' : ''}}">
+    <mat-label>{{'page.login.password' | translate}}</mat-label>
+    <input #pw1 type="password" name="pw1" matInput [(ngModel)]="password1" [formControl]="password1FormControl" (input)="validateConfirmationPassword()">
+    <button type="button" matSuffix mat-icon-button (click)="pw1.type = pw1.type == 'text' ? 'password' : 'text'" tabindex="-1">
+      <mat-icon>{{pw1.type == 'text' ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="password1FormControl.hasError('required')">
+      {{'page.login.errors.required_password' | translate}}
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="register-form-field {{passwordConfirmed && password2 ? 'confirmed' : 'pending'}}" color="{{passwordConfirmed && password2 ? 'accent' : ''}}">
+    <mat-label>{{'page.register.confirm_password' | translate}}</mat-label>
+    <input #pw2 type="password" name="pw2" matInput [(ngModel)]="password2" [formControl]="password2FormControl" (input)="validateConfirmationPassword()">
+    <button type="button" matSuffix mat-icon-button (click)="pw2.type = pw2.type == 'text' ? 'password' : 'text'" tabindex="-1">
+      <mat-icon>{{pw2.type == 'text' ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="password2FormControl.hasError('required')">
+      {{'page.login.errors.required_confirm_password' | translate}}
+    </mat-error>
+    <mat-error *ngIf="password2FormControl.hasError('different') && !password2FormControl.hasError('required')">
+      {{'page.register.errors.different_password' | translate}}
+    </mat-error>
+  </mat-form-field>
+  
+  <button mat-raised-button color="primary" disabled="{{formIsDone()}}">
+    {{'page.register.register' | translate}}
+  </button>
+</form>
+

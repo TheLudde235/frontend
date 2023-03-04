@@ -1,0 +1,11 @@
+<form action="" (submit)="confirm()">
+    <mat-form-field>
+        <mat-label>
+            {{'page.adminconfirmation.code' | translate}}
+        </mat-label>
+        <input type="text" name="code" matInput [(ngModel)]="code">
+    </mat-form-field>
+    <button mat-raised-button color="primary">
+        {{'page.adminconfirmation.confirm' | translate}}
+    </button>
+</form>

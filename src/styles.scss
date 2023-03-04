@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; background-color: #303030; overscroll-behavior-y: none; overflow: hidden;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.backdrop { 
+  position: fixed;
+  // TODO: This overlaps the navbar when screen is not in mobile
+  top: 3.5rem;
+  width: 100%;
+  height: calc(100% - 3.5rem);
+  z-index: 100;
+  background-color: rgba(189,189,189,.6);
+  mat-spinner {
+    margin: auto;
+    margin-top: 200px;
+  }
+}

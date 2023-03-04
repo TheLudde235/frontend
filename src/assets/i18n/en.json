@@ -1,0 +1,60 @@
+{
+  "page": {
+    "login": {
+      "admin": "Admin Login",
+      "username": "Username",
+      "password": "Password",
+      "register": "Register",
+      "worker_Login": "Worker Login",
+      "no_account": "Don't have an account?",
+      "login": "Login",
+      "errors": {
+        "required_username": "Username is required",
+        "required_password": "Password is required",
+        "alphanumeric_username": "Username has to be alphanumeric [ A-z, 0-9 ]",
+        "required_confirm_password": "You need to type the password again"
+      }
+    },
+    "admin": {
+      "fail_dialog": {
+        "title": "Login Failed",
+        "content": "Username or password was incorrect, please try again"
+      }
+    },
+    "register": {
+      "admin": "Register Admin",
+      "register": "Register",
+      "email": "Email",
+      "required_email": "Email is required",
+      "valid_email": "Must be valid email",
+      "occupied_username": "Username is occupied",
+      "unique_email": "Email is occupied",
+      "confirm_password": "Confirm password",
+      "errors": {
+        "different_password": "The passwords are different"
+      }
+    },
+    "adminconfirmation": {
+      "code": "Confirmation code",
+      "confirm": "Submit"
+    }
+  },
+  "nav": {
+    "login": "Login",
+    "register": "Register"
+  },
+  "errors": {
+    "dialog": {
+      "server": {
+        "title": "Server error",
+        "content": "Our servers are down, please try logging in later"
+      },
+      "failed_login": "Login Failed"
+    }
+  },
+  "server": {
+    "error": {
+      "wrong_username_or_password": "Wrong username or password"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+$width: 70%;
+
+form {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    min-width: $width;
+    color: #dddddd;
+  }
+
+  .admin-form-field {
+    width: $width;
+  }
+  button {
+    width: $width;
+  }
+}
+
+.form-footer {
+  width: $width;
+  margin: 2% auto;
+  p {
+    text-align: center;
+  }
+  .buttons {
+    display: flex;
+    gap: 3%;
+    justify-content: center;
+    a {
+      width: fit-content;
+    }
+  }
+}

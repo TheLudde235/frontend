@@ -1,0 +1,7 @@
+<div class="dialog" *ngIf="data">
+  <h1 mat-dialog-title>{{data.title ?? 'No Title'}}</h1>
+  <div mat-dialog-content>{{data.content ?? 'No Content'}}</div>
+  <div mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close cdkFocusInitial color="{{data.color ?? 'primary'}}">Ok</button>
+  </div>
+</div>

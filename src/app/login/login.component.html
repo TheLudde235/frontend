@@ -1,0 +1,42 @@
+<div class="backdrop" *ngIf="loading">
+  <mat-spinner diameter="56"></mat-spinner>
+</div>
+<form #form='ngForm' (submit)="login()">
+  <h2>{{'page.login.admin' | translate}}</h2>
+  <mat-form-field class="admin-form-field">
+    <mat-label>{{'page.login.username' | translate }}</mat-label>
+    <input #username [errorStateMatcher]="esMatcher" [formControl]="usernameFormControl" matInput type="text" name="username" [(ngModel)]="usernameValue">
+    <button type="button" matSuffix mat-icon-button (click)="usernameValue = ''" *ngIf="username.value" tabindex="-1">
+      <mat-icon>clear</mat-icon>
+    </button>
+    <mat-error *ngIf="usernameFormControl.hasError('pattern') && !usernameFormControl.hasError('required')">
+      {{'page.login.errors.alphanumeric_username' | translate}}
+    </mat-error>
+    <mat-error *ngIf="usernameFormControl.hasError('required')">
+      {{'page.login.errors.required_username' | translate}}
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="admin-form-field">
+    <mat-label>{{'page.login.password' | translate}}</mat-label>
+    <input #password matInput type="password" [formControl]="passwordFormControl" name="password" [(ngModel)]="passwordValue">
+    <button type="button" matSuffix mat-icon-button (click)="password.type == 'password' ? password.type = 'text' : password.type = 'password'" tabindex="-1">
+      <mat-icon>{{password.type == 'password' ? 'visibility' : 'visibility_off'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="passwordFormControl.hasError('required')">
+      {{'page.login.errors.required_password' | translate}}
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" disabled="{{passwordFormControl.hasError('required') || usernameFormControl.hasError('pattern') || !usernameValue}}">
+    {{'page.login.login' | translate}}
+  </button>
+</form>
+
+<div class="form-footer">
+  <p>{{'page.login.no_account' | translate}}</p>
+  <div class="buttons">
+    <a href="/register" mat-raised-button color="accent">{{'page.login.register' | translate}}</a>
+    <a href="/workerlogin" mat-raised-button color="accent">{{'page.login.worker_Login' | translate}}</a>
+  </div>
+</div>
