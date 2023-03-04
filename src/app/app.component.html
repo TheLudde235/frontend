@@ -6,12 +6,16 @@
 </mat-toolbar>
 
 <mat-drawer-container [hasBackdrop]="true">
-  <mat-drawer #drawer [mode]="'over'">
+  <mat-drawer #drawer [mode]="'over'" opened>
     <mat-nav-list>
-      <a href="/login" mat-list-item><mat-icon mat-list-icon>account_circle</mat-icon>{{'nav.login' | translate }}</a>
-    </mat-nav-list>
-    <mat-nav-list>
-      <a href="/register" mat-list-item><mat-icon mat-list-icon>person_add</mat-icon>{{'nav.register' | translate}}</a>
+      <a href="/login" mat-list-item>
+        <mat-icon mat-list-icon>account_circle</mat-icon>
+        <span mat-line>{{'nav.login' | translate }}</span>
+      </a>
+      <a href="/register" mat-list-item>
+        <mat-icon mat-list-icon>person_add</mat-icon>
+        <span>{{'nav.register' | translate}}</span>
+      </a>
     </mat-nav-list>
   </mat-drawer>
   <mat-drawer-content>

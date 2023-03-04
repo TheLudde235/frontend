@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { catchError, forkJoin } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ import { environment } from 'src/environments/environment';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(public _httpClient: HttpClient, private _translateService: TranslateService, private _dialog: MatDialog) { }
+  constructor(public _httpClient: HttpClient, private _translateService: TranslateService, private _dialog: MatDialog, private _router: Router) { }
 
   ngOnInit(): void {
   }
@@ -129,7 +130,7 @@ export class RegisterComponent implements OnInit {
     )
     .subscribe(res => {
       this.loading = false;
-      console.log(res);
+      this._router.navigate(['/adminconfirmation']);
     });
   }
 

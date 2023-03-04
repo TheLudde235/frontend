@@ -10,23 +10,16 @@ form {
     min-width: $width;
     color: #dddddd;
   }
-
+}
+.form-input {
+  width: $width;
   mat-form-field {
-    width: $width;
-  }
-  button {
-    width: $width;
+    width: 100%;
+    flex: 9;
   }
 }
-
-.not-occupied, .confirmed {
-  ::ng-deep{
-    .mat-form-field-underline{
-      background-color: $accent;
-    
-    } 
-    .mat-form-field-label{
-      color: $accent;
-    }
-  } 
+.done-icon {
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 5px;
 }

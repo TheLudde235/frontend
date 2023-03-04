@@ -10,7 +10,16 @@ mat-toolbar {
 }
 
 mat-drawer {
-  width: 60%
+  width: 60%;
+  mat-nav-list {
+    mat-icon {
+      position: absolute;
+    }
+    span {
+      margin-top: 5px;
+      margin-left: 29px;
+    }
+  }
 }
 
 mat-drawer-container {
