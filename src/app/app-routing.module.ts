@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminconfirmationComponent } from './adminconfirmation/adminconfirmation.component';
 import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
+import { MypagesComponent } from './mypages/mypages.component';
 import { RegisterComponent } from './register/register.component';
 import { WorkerloginComponent } from './workerlogin/workerlogin.component';
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'adminconfirmation', component: AdminconfirmationComponent},
   { path: 'workerlogin', component: WorkerloginComponent},
+  { path: 'mypages', component: MypagesComponent},
   { path: '**', redirectTo: ''}
 ];
 

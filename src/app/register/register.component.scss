@@ -23,3 +23,12 @@ form {
   margin-top: 15px;
   margin-left: 5px;
 }
+.form-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  button, a {
+    margin: auto;
+    width: fit-content;
+  }
+}

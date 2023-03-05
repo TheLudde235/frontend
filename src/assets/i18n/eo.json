@@ -4,7 +4,8 @@
       "server": {
         "content": "Niaj serviloj malfunkcias, bonvolu provi ensaluti poste",
         "title": "Servila eraro"
-      }
+      },
+      "failed_login": "Ensaluto malsukcesis"
     }
   },
   "nav": {
@@ -13,7 +14,10 @@
     "settings": {
       "admin": "Administraj agordoj",
       "language": "Lingvo"
-    }
+    },
+    "logout": "Elsaluti",
+    "myestates": "Biendomoj",
+    "mypages": "Miaj Paĝoj"
   },
   "page": {
     "admin": {
@@ -52,12 +56,33 @@
       "register": "Registru",
       "required_email": "Retpoŝto estas postulata",
       "unique_email": "Retpoŝto estas okupata",
-      "valid_email": "Devas esti valida retpoŝto"
+      "valid_email": "Devas esti valida retpoŝto",
+      "input_code": "Ĉu jam havas kodon?"
+    },
+    "mypages": {
+      "add_estate": "Aldonu Bienon",
+      "add_task": "Aldoni Taskon",
+      "estates": "Biendomoj",
+      "tasks": "Tasko",
+      "welcome": "Bonvenon"
     }
   },
   "server": {
     "error": {
       "wrong_username_or_password": "Malĝusta uzantnomo aŭ pasvorto"
+    }
+  },
+  "dialog": {
+    "task": {
+      "add_task": "Aldoni Taskon",
+      "cancel": "Nuligi",
+      "choose_deadline": "Elektu limdaton",
+      "closed": "Fermita",
+      "estate": "Biendomo",
+      "leave_empty": "Se neniu, lasu malplena",
+      "opened": "Malfermita",
+      "priority": "Prioritato",
+      "title": "Titolo"
     }
   }
 }

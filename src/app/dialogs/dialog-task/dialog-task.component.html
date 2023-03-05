@@ -1,0 +1,70 @@
+<h1 mat-dialog-title>{{ "dialog.task.add_task" | translate }}</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "dialog.task.estate" | translate }}</mat-label>
+    <mat-select [(value)]="data.estateuuid" required>
+      <mat-option
+        #estate
+        *ngFor="let estate of estates"
+        value="{{ estate.estateuuid }}"
+      >
+        {{ estate.street }} <br />
+        {{ estate.description }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "dialog.task.title" | translate }}</mat-label>
+    <input matInput [(ngModel)]="data.title" required />
+  </mat-form-field>
+  <label>
+    {{ "dialog.task.priority" | translate }}
+  </label>
+  <mat-slider
+    class="example-margin"
+    [max]="256"
+    [min]="0"
+    [step]="32"
+    [discrete]="true"
+    [showTickMarks]="true"
+  >
+    <input matSliderThumb [(ngModel)]="data.priority" />
+  </mat-slider>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "dialog.task.choose_deadline" | translate }}</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="data.deadline" [required]="false"/>
+    <mat-hint>({{ "dialog.task.leave_empty" | translate }})</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>{{ "dialog.task.description" | translate }}</mat-label>
+    <textarea matInput [(ngModel)]="data.description"></textarea>
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="{{ data.open ? 'warn' : 'accent' }}"
+    (click)="data.open = !data.open"
+  >
+    {{ (data.open ? "dialog.task.opened" : "dialog.task.closed") | translate }}
+    <mat-icon>
+      {{ data.open ? "meeting_room" : "door_front" }}
+    </mat-icon>
+  </button>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">
+    {{ "dialog.task.cancel" | translate }}
+  </button>
+  <button
+    mat-raised-button
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+    disabled="{{ !data.title || !data.estateuuid }}"
+    color="primary"
+  >
+    Ok
+  </button>
+</div>

@@ -1,214 +1,213 @@
-<form #form='ngForm'
-	(submit)="register()">
-	<h2>
-		{{'page.register.admin' | translate}}
-	</h2>
-	<div class="form-input">
-		<mat-form-field class="register-form-field"
-			color="{{usernameUnique ? 'accent' : 'primary'}}"
-			hintLabel="Max 30 characters">
-			<mat-label>
-				{{'page.login.username' | translate }}
-			</mat-label>
-			<input [errorStateMatcher]="esMatcher"
-				[formControl]="usernameFormControl"
-				[(ngModel)]="usernameValue"
-				(input)="validateUsername()"
-				type="text"
-				matInput
-				maxlength="30">
+<app-loading-spinner [loading]="loading"></app-loading-spinner>
+<form #form="ngForm" (submit)="register()">
+  <h2>
+    {{ "page.register.admin" | translate }}
+  </h2>
+  <div class="form-input">
+    <mat-form-field
+      class="register-form-field"
+      color="{{ usernameUnique ? 'accent' : 'primary' }}"
+      hintLabel="Max 30 characters"
+    >
+      <mat-label>
+        {{ "page.login.username" | translate }}
+      </mat-label>
+      <input
+        [errorStateMatcher]="esMatcher"
+        [formControl]="usernameFormControl"
+        [(ngModel)]="usernameValue"
+        (input)="validateUsername()"
+        type="text"
+        matInput
+        maxlength="30"
+      />
 
+      <button
+        *ngIf="usernameValue"
+        (click)="usernameValue = ''"
+        tabindex="-1"
+        type="button"
+        matSuffix
+        mat-icon-button
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
 
+      <mat-hint [align]="'end'"> {{ usernameValue.length }}/30 </mat-hint>
 
-			<button *ngIf="usernameValue"
-				(click)="usernameValue = ''"
-				tabindex="-1"
-				type="button"
-				matSuffix
-				mat-icon-button>
-				<mat-icon>clear</mat-icon>
-			</button>
+      <mat-error
+        *ngIf="
+          usernameFormControl.hasError('pattern') &&
+          !usernameFormControl.hasError('required')
+        "
+      >
+        {{ "page.login.errors.alphanumeric_username" | translate }}
+      </mat-error>
 
+      <mat-error *ngIf="usernameFormControl.hasError('required')">
+        {{ "page.login.errors.required_username" | translate }}
+      </mat-error>
 
+      <mat-error *ngIf="usernameFormControl.errors?.['notUnique']">
+        {{ "page.register.occupied_username" | translate }}
+      </mat-error>
+    </mat-form-field>
 
-			<mat-hint [align]="'end'">
-				{{usernameValue.length}}/30
-			</mat-hint>
+    <mat-icon
+      class="done-icon"
+      color="{{
+        usernameUnique && !usernameFormControl.errors ? 'accent' : 'warn'
+      }}"
+    >
+      {{ usernameUnique && !usernameFormControl.errors ? "done" : "close" }}
+    </mat-icon>
+  </div>
 
+  <div class="form-input">
+    <mat-form-field
+      class="register-form-field"
+      color="{{ emailUnique ? 'accent' : 'primary' }}"
+    >
+      <mat-label>
+        {{ "page.register.email" | translate }}
+      </mat-label>
 
+      <input
+        [errorStateMatcher]="esMatcher"
+        [(ngModel)]="emailValue"
+        [formControl]="emailFormControl"
+        (input)="validateEmail()"
+        type="text"
+        matInput
+      />
 
-			<mat-error *ngIf="usernameFormControl.hasError('pattern') && !usernameFormControl.hasError('required')">
-				{{'page.login.errors.alphanumeric_username' | translate}}
-			</mat-error>
+      <button
+        *ngIf="emailValue"
+        (click)="emailValue = ''"
+        type="button"
+        matSuffix
+        mat-icon-button
+        tabindex="-1"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
 
+      <mat-error *ngIf="emailFormControl.hasError('pattern')">
+        {{ "page.register.valid_email" | translate }}
+      </mat-error>
 
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        {{ "page.register.required_email" | translate }}
+      </mat-error>
 
-			<mat-error *ngIf="usernameFormControl.hasError('required')">
-				{{'page.login.errors.required_username' | translate}}
-			</mat-error>
+      <mat-error *ngIf="emailFormControl.errors?.['notUnique']">
+        {{ "page.register.unique_email" | translate }}
+      </mat-error>
+    </mat-form-field>
 
+    <mat-icon
+      class="done-icon"
+      color="{{ emailUnique && !emailFormControl.errors ? 'accent' : 'warn' }}"
+    >
+      {{ emailUnique && !emailFormControl.errors ? "done" : "close" }}
+    </mat-icon>
+  </div>
 
+  <div class="form-input">
+    <mat-form-field
+      class="register-form-field"
+      color="{{ passwordConfirmed && password1 ? 'accent' : '' }}"
+    >
+      <mat-label>
+        {{ "page.login.password" | translate }}
+      </mat-label>
 
-			<mat-error *ngIf="usernameFormControl.errors?.['notUnique']">
-				{{'page.register.occupied_username' | translate}}
-			</mat-error>
-		</mat-form-field>
+      <input
+        #pw1
+        [(ngModel)]="password1"
+        [formControl]="password1FormControl"
+        (input)="validateConfirmationPassword()"
+        type="password"
+        name="pw1"
+        matInput
+      />
 
+      <button
+        (click)="pw1.type = pw1.type == 'text' ? 'password' : 'text'"
+        type="button"
+        matSuffix
+        mat-icon-button
+        tabindex="-1"
+      >
+        <mat-icon>
+          {{ pw1.type == "text" ? "visibility_off" : "visibility" }}
+        </mat-icon>
+      </button>
 
-
-		<mat-icon class="done-icon"
-			color="{{usernameUnique && !usernameFormControl.errors ? 'accent': 'warn'}}">
-			{{usernameUnique && !usernameFormControl.errors ? 'done' : 'close'}}
-		</mat-icon>
-
-
-
-	</div>
-
-
-
-	<div class="form-input">
-		<mat-form-field class="register-form-field"
-			color="{{emailUnique ? 'accent' : 'primary'}}">
-			<mat-label>
-				{{'page.register.email' | translate}}
-			</mat-label>
-
-
-
-			<input [errorStateMatcher]="esMatcher"
-				[(ngModel)]="emailValue"
-				[formControl]="emailFormControl"
-				(input)="validateEmail()"
-				type="text"
-				matInput>
-
-
-
-			<button *ngIf="emailValue"
-				(click)="emailValue = ''"
-				type="button"
-				matSuffix
-				mat-icon-button
-				tabindex="-1">
-				<mat-icon>clear</mat-icon>
-			</button>
-
-
-
-			<mat-error *ngIf="emailFormControl.hasError('pattern')">
-				{{'page.register.valid_email' | translate}}
-			</mat-error>
-
-
-
-			<mat-error *ngIf="emailFormControl.hasError('required')">
-				{{'page.register.required_email' | translate}}
-			</mat-error>
-
-
-
-			<mat-error *ngIf="emailFormControl.errors?.['notUnique']">
-				{{'page.register.unique_email' | translate}}
-			</mat-error>
-
-
-
-		</mat-form-field>
-
-
-
-		<mat-icon class="done-icon"
-			color="{{emailUnique && !emailFormControl.errors ? 'accent': 'warn'}}">
-			{{emailUnique && !emailFormControl.errors ? 'done' : 'close'}}
-		</mat-icon>
-	</div>
-
-
-
-	<div class="form-input">
-		<mat-form-field class="register-form-field"
-			color="{{passwordConfirmed && password1 ? 'accent' : ''}}">
-			<mat-label>
-				{{'page.login.password' | translate}}
-			</mat-label>
-
-
-
-			<input #pw1
-				[(ngModel)]="password1"
-				[formControl]="password1FormControl"
-				(input)="validateConfirmationPassword()"
-				type="password"
-				name="pw1"
-				matInput>
-
-
-
-			<button (click)="pw1.type = pw1.type == 'text' ? 'password' : 'text'"
-				type="button"
-				matSuffix
-				mat-icon-button
-				tabindex="-1">
-				<mat-icon>
-					{{pw1.type == 'text' ? 'visibility_off' : 'visibility'}}
-				</mat-icon>
-			</button>
-
-
-
-			<mat-error *ngIf="password1FormControl.hasError('required')">
-				{{'page.login.errors.required_password' | translate}}
-			</mat-error>
-		</mat-form-field>
-		<mat-icon class="done-icon"
-			color="{{passwordConfirmed ? 'accent': 'warn'}}">
-			{{passwordConfirmed ? 'done' : 'close'}}
-		</mat-icon>
-	</div>
-	<div class="form-input">
-		<mat-form-field class="register-form-field"
-			color="{{passwordConfirmed && password2 ? 'accent' : ''}}">
-			<mat-label>
-				{{'page.register.confirm_password' | translate}}
-			</mat-label>
-			<input #pw2
-				[(ngModel)]="password2"
-				[formControl]="password2FormControl"
-				(input)="validateConfirmationPassword()"
-				type="password"
-				name="pw2"
-				matInput>
-			<button (click)="pw2.type = pw2.type == 'text' ? 'password' : 'text'"
-				type="button"
-				matSuffix
-				mat-icon-button
-				tabindex="-1">
-				<mat-icon>
-					{{pw2.type == 'text' ? 'visibility_off' : 'visibility'}}
-				</mat-icon>
-			</button>
-			<mat-error *ngIf="password2FormControl.hasError('required')">
-				{{'page.login.errors.required_confirm_password' | translate}}
-			</mat-error>
-			<mat-error *ngIf="password2FormControl.hasError('different') && !password2FormControl.hasError('required')">
-				{{'page.register.errors.different_password' | translate}}
-			</mat-error>
-		</mat-form-field>
-		<mat-icon class="done-icon"
-			color="{{passwordConfirmed ? 'accent': 'warn'}}">
-			{{passwordConfirmed ? 'done' : 'close'}}
-		</mat-icon>
-	</div>
-	<div class="form-footer">
-		<button mat-raised-button
-			color="primary"
-			disabled="{{formIsDone()}}">
-			{{'page.register.register' | translate}}
-		</button>
-		<button mat-raised-button
-			color="primary">
-			Skriv in kod
-		</button>
-	</div>
+      <mat-error *ngIf="password1FormControl.hasError('required')">
+        {{ "page.login.errors.required_password" | translate }}
+      </mat-error>
+    </mat-form-field>
+    <mat-icon
+      class="done-icon"
+      color="{{ passwordConfirmed ? 'accent' : 'warn' }}"
+    >
+      {{ passwordConfirmed ? "done" : "close" }}
+    </mat-icon>
+  </div>
+  <div class="form-input">
+    <mat-form-field
+      class="register-form-field"
+      color="{{ passwordConfirmed && password2 ? 'accent' : '' }}"
+    >
+      <mat-label>
+        {{ "page.register.confirm_password" | translate }}
+      </mat-label>
+      <input
+        #pw2
+        [(ngModel)]="password2"
+        [formControl]="password2FormControl"
+        (input)="validateConfirmationPassword()"
+        type="password"
+        name="pw2"
+        matInput
+      />
+      <button
+        (click)="pw2.type = pw2.type == 'text' ? 'password' : 'text'"
+        type="button"
+        matSuffix
+        mat-icon-button
+        tabindex="-1"
+      >
+        <mat-icon>
+          {{ pw2.type == "text" ? "visibility_off" : "visibility" }}
+        </mat-icon>
+      </button>
+      <mat-error *ngIf="password2FormControl.hasError('required')">
+        {{ "page.login.errors.required_confirm_password" | translate }}
+      </mat-error>
+      <mat-error
+        *ngIf="
+          password2FormControl.hasError('different') &&
+          !password2FormControl.hasError('required')
+        "
+      >
+        {{ "page.register.errors.different_password" | translate }}
+      </mat-error>
+    </mat-form-field>
+    <mat-icon
+      class="done-icon"
+      color="{{ passwordConfirmed ? 'accent' : 'warn' }}"
+    >
+      {{ passwordConfirmed ? "done" : "close" }}
+    </mat-icon>
+  </div>
+  <div class="form-footer">
+    <button mat-raised-button color="primary" disabled="{{ formIsDone() }}">
+      {{ "page.register.register" | translate }}
+    </button>
+    <a mat-raised-button href="/adminconfirmation" color="primary">
+      {{ "page.register.input_code" | translate }}
+    </a>
+  </div>
 </form>

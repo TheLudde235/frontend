@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { Language } from "../reducers";
+import { Language } from "../models/runtime";
 
 export enum ActionTypes {
     Set = '[App Component] Set',

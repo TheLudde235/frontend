@@ -1,78 +1,72 @@
 <mat-toolbar color="primary">
-	<button (click)="drawer.toggle()"
-		mat-icon-button>
-		<mat-icon>menu</mat-icon>
-	</button>
-	<a href="/">
-		<img src="../assets/images/Taxami-logo.svg"
-			alt="Taxami Logo">
-	</a>
+  <button (click)="drawer.toggle()" mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a href="/">
+    <img src="../assets/images/Taxami-logo.svg" alt="Taxami Logo" />
+  </a>
 </mat-toolbar>
 
-
 <mat-drawer-container [hasBackdrop]="true">
-	<mat-drawer #drawer
-		[mode]="'over'">
-		<mat-nav-list>
-			<a href="/login"
-				mat-list-item>
-				<mat-icon mat-list-icon>account_circle</mat-icon>
-				<span mat-line>
-					{{'nav.login' | translate }}
-				</span>
-			</a>
-			<a href="/register"
-				mat-list-item>
-				<mat-icon mat-list-icon>person_add</mat-icon>
-				<span>
-					{{'nav.register' | translate}}
-				</span>
-			</a>
+  <mat-drawer #drawer [mode]="'over'">
+    <mat-nav-list>
+      <a href="/login" *ngIf="!loggedIn" mat-list-item>
+        <mat-icon mat-list-icon>login</mat-icon>
+        <span>
+          {{ "nav.login" | translate }}
+        </span>
+      </a>
+      <a href="/register" *ngIf="!loggedIn" mat-list-item>
+        <mat-icon mat-list-icon>person_add</mat-icon>
+        <span>
+          {{ "nav.register" | translate }}
+        </span>
+      </a>
 
+      <a href="/mypages" *ngIf="loggedIn" mat-list-item>
+        <mat-icon> account_circle </mat-icon>
+        <span>{{ "nav.mypages" | translate }}</span>
+      </a>
+      <a href="/myestates" *ngIf="loggedIn" mat-list-item>
+        <mat-icon>apartment</mat-icon>
+        <span>{{ "nav.myestates" | translate }}</span></a
+      >
+    </mat-nav-list>
+    <button [matMenuTriggerFor]="menu" mat-icon-button class="settings-button">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button *ngIf="loggedIn" mat-menu-item>
+        <mat-icon> admin_panel_settings </mat-icon>
+        <span>
+          {{ "nav.settings.admin" | translate }}
+        </span>
+      </button>
+      <button [matMenuTriggerFor]="languages" mat-menu-item>
+        <mat-icon>language</mat-icon>
+        <span>
+          {{ "nav.settings.language" | translate }}
+        </span>
+      </button>
+      <button *ngIf="loggedIn" mat-menu-item (click)="logout()">
+        <mat-icon mat-list-icon>logout</mat-icon>
+        <span>
+          {{ "nav.logout" | translate }}
+        </span>
+      </button>
+    </mat-menu>
 
-		</mat-nav-list>
-		<button [matMenuTriggerFor]="menu"
-			mat-icon-button
-			class="settings-button">
-			<mat-icon>settings</mat-icon>
-		</button>
-		<mat-menu #menu="matMenu">
-			<button mat-menu-item>
-				<mat-icon>
-					admin_panel_settings
-				</mat-icon>
-				<span>
-					{{'nav.settings.admin' | translate}}
-				</span>
-			</button>
-			<button [matMenuTriggerFor]="languages"
-				mat-menu-item>
-				<mat-icon>language</mat-icon>
-				<span>
-					{{'nav.settings.language' | translate}}
-				</span>
-			</button>
-		</mat-menu>
-
-
-		<mat-menu #languages="matMenu">
-			<button (click)="changeLanguage('eo')"
-				mat-menu-item>
-				Esperanto
-			</button>
-			<button (click)="changeLanguage('en')"
-				mat-menu-item>
-				English
-			</button>
-			<button (click)="changeLanguage('sv')"
-				mat-menu-item>
-				Svenska
-			</button>
-		</mat-menu>
-
-
-	</mat-drawer>
-	<mat-drawer-content>
-		<router-outlet></router-outlet>
-	</mat-drawer-content>
+    <mat-menu #languages="matMenu">
+      <button (click)="changeLanguage('eo')" mat-menu-item>Esperanto</button>
+      <button (click)="changeLanguage('en')" mat-menu-item>English</button>
+      <button (click)="changeLanguage('sv')" mat-menu-item>Svenska</button>
+    </mat-menu>
+  </mat-drawer>
+  <mat-drawer-content>
+    <button mat-raised-button color="warn" (click)="openDialog()">
+      session Data
+    </button>
+    {{ loggedIn }}
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
 </mat-drawer-container>

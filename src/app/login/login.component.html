@@ -1,7 +1,4 @@
-<div *ngIf="loading"
-	class="backdrop">
-	<mat-spinner diameter="56"></mat-spinner>
-</div>
+<app-loading-spinner [loading]="loading"></app-loading-spinner>
 <form #form='ngForm'
 	(submit)="login()">
 	<h2>

@@ -3,10 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { catchError, forkJoin, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { DialogOkComponent } from '../dialog-ok/dialog-ok.component';
+import { DialogOkComponent } from '../dialogs/dialog-ok/dialog-ok.component';
+import { SetSession } from '../store/actions/session.actions';
+import { Token } from '../token';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +18,7 @@ import { DialogOkComponent } from '../dialog-ok/dialog-ok.component';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public _httpClient: HttpClient, public _dialog: MatDialog, public _translateService: TranslateService) { }
+  constructor(public _httpClient: HttpClient, public _dialog: MatDialog, public _translateService: TranslateService, private store: Store) { }
 
   ngOnInit(): void {
   }
@@ -56,10 +59,14 @@ export class LoginComponent implements OnInit {
       })
     ).subscribe(r => {
       this.loading = false;
-      if (r.ok === false) return;
-      
-      localStorage.setItem('token', r['token']);
-      location.href = '/adminpage'
+      const user: Token = JSON.parse(atob(r.token.split('.')[1]));
+      console.log(user)
+      this.store.dispatch(new SetSession({
+        ...user,
+        token: r.token,
+        loggedIn: true
+      }))
+      location.href = '/mypages'
     });
   }
 

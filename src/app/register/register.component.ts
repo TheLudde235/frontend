@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
 import { AbstractControl, FormControl, FormGroupDirective, NgForm, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
 import { ErrorStateMatcher, ThemePalette } from '@angular/material/core';
-import { DialogOkComponent } from '../dialog-ok/dialog-ok.component';
+import { DialogOkComponent } from '../dialogs/dialog-ok/dialog-ok.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
-import { catchError, forkJoin } from 'rxjs';
+import { catchError, forkJoin, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 
@@ -108,6 +108,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
+    this.loading = true;
     const url = new URL(environment.endpoint + 'register');
     this._httpClient.post(url.toString(), {
       username: this.usernameValue,
@@ -125,12 +126,13 @@ export class RegisterComponent implements OnInit {
         } else if (err.error) {
             this.openDialog('Login Failed', err.error.msg);
         }
-        return err ? err.message : caught;
+        return of(err) ?? caught;
       })
     )
     .subscribe(res => {
       this.loading = false;
-      this._router.navigate(['/adminconfirmation']);
+      console.log(res)
+      // this._router.navigate(['/adminconfirmation']);
     });
   }
 

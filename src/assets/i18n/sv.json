@@ -11,7 +11,8 @@
       "errors": {
         "different_password": "Lösenorden är olika"
       },
-      "register": "Registrera"
+      "register": "Registrera",
+      "input_code": "Har du redan en kod?"
     },
     "login": {
       "username": "Användarnamn",
@@ -37,6 +38,13 @@
     "adminconfirmation": {
       "code": "Konfirmations kod",
       "confirm": "Skicka"
+    },
+    "mypages": {
+      "add_estate": "Lägg till Estate",
+      "add_task": "Lägg till uppgift",
+      "estates": "Gods",
+      "tasks": "Uppgift",
+      "welcome": "Välkommen"
     }
   },
   "errors": {
@@ -44,7 +52,8 @@
       "server": {
         "title": "Serverfel",
         "content": "Våra servrar är nere, vänligen försök senare"
-      }
+      },
+      "failed_login": "Inloggningen misslyckades"
     }
   },
   "nav": {
@@ -53,11 +62,27 @@
     "settings": {
       "admin": "Administratörsinställningar",
       "language": "Språk"
-    }
+    },
+    "logout": "Logga ut",
+    "myestates": "Gods",
+    "mypages": "Mina sidor"
   },
   "server": {
     "error": {
       "wrong_username_or_password": "Fel användarnamn eller lösenord"
+    }
+  },
+  "dialog": {
+    "task": {
+      "add_task": "Lägg till uppgift",
+      "cancel": "Annullera",
+      "choose_deadline": "Välj deadline",
+      "closed": "Stängd",
+      "estate": "Egendom",
+      "leave_empty": "Om ingen, lämna tom",
+      "opened": "Öppnad",
+      "priority": "Prioritet",
+      "title": "Titel"
     }
   }
 }

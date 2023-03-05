@@ -1,0 +1,17 @@
+<ng-container *ngIf="session$ | async as session">
+  <div class="estates">
+    <div>
+      <h1>{{ "page.mypages.estates" | translate }}</h1>
+      <button mat-icon-button (click)="refresh()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+    <div class="estate" *ngFor="let estate of session.estates">
+      <a href="/estate/{{ estate.uuid }}">
+        <h2>{{ estate.city }}, {{ estate.street }}</h2>
+      </a>
+      <h4>{{estate.streetnumber}}</h4>
+      <p>{{ estate.description }}</p>
+    </div>
+  </div>
+</ng-container>

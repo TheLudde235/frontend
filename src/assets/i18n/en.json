@@ -32,11 +32,21 @@
       "confirm_password": "Confirm password",
       "errors": {
         "different_password": "The passwords are different"
-      }
+      },
+      "input_code": "Already have a code?"
     },
     "adminconfirmation": {
       "code": "Confirmation code",
       "confirm": "Submit"
+    },
+    "mypages": {
+      "welcome": "Welcome",
+      "estates": "Estates",
+      "tasks": "Task",
+      "add_estate": "Add Estate",
+      "add_task": "Add Task",
+      "remove_estate": "Remove Estate",
+      "remove_task": "Remove Task"
     }
   },
   "nav": {
@@ -45,19 +55,37 @@
     "settings": {
       "language": "Language",
       "admin": "Admin settings"
-    }
+    },
+    "logout": "Logout",
+    "mypages": "My Pages",
+    "myestates": "Estates"
   },
   "errors": {
     "dialog": {
       "server": {
         "title": "Server error",
         "content": "Our servers are down, please try logging in later"
-      }
+      },
+      "failed_login": "Login Failed"
     }
   },
   "server": {
     "error": {
       "wrong_username_or_password": "Wrong username or password"
+    }
+  },
+  "dialog": {
+    "task": {
+      "add_task": "Add Task",
+      "title": "Title",
+      "cancel": "Cancel",
+      "estate": "Estate",
+      "closed": "Closed",
+      "opened": "Opened",
+      "priority": "Priority",
+      "choose_deadline": "Choose deadline",
+      "leave_empty": "If none, leave empty",
+      "description": "Description"
     }
   }
 }

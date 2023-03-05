@@ -1,5 +1,6 @@
-import { getLanguage, Language } from ".";
+import { getLanguage } from ".";
 import { ActionsUnion, ActionTypes } from "../actions/i18n.actions";
+import { Language } from "../models/runtime";
 
 export const initialState = getLanguage(navigator.language);
 
