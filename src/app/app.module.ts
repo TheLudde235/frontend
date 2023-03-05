@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +28,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {MatMenuModule} from '@angular/material/menu';
 import { AdminconfirmationComponent } from './adminconfirmation/adminconfirmation.component';
+import { reducers, metaReducers } from './reducers';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -73,6 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    StoreModule.forRoot(reducers, {metaReducers})
   ],
   providers: [],
   bootstrap: [AppComponent]

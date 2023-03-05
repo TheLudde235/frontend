@@ -1,7 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { TranslateService } from '@ngx-translate/core';
-import { fromEvent, withLatestFrom, zipWith } from 'rxjs';
+import { fromEvent, Observable, withLatestFrom, zipWith } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Set } from './actions/i18n.actions';
+import { getLanguage, Language } from './reducers';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +17,15 @@ export class AppComponent {
   @ViewChild('drawer')
   public drawer!: MatDrawer;
 
-  constructor (public _translate: TranslateService) {}
+  constructor (private _translate: TranslateService, private store: Store<{lang: string}>) {
+    store.select('lang').subscribe(data => {
+      _translate.use(data);
+    });
+  }
   
-
-
+  changeLanguage(lang: Language) {
+    this.store.dispatch(new Set(lang));
+  }
 
   ngAfterViewInit(): void {
   fromEvent<TouchEvent>(document, 'touchstart')

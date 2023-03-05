@@ -33,9 +33,9 @@
     </mat-menu>
 
     <mat-menu #languages="matMenu">
-      <button mat-menu-item (click)="_translate.use('eo')">Esperanto</button>
-      <button mat-menu-item (click)="_translate.use('en')">English</button>
-      <button mat-menu-item (click)="_translate.use('sv')">Svenska</button>
+      <button mat-menu-item (click)="changeLanguage('eo')">Esperanto</button>
+      <button mat-menu-item (click)="changeLanguage('en')">English</button>
+      <button mat-menu-item (click)="changeLanguage('sv')">Svenska</button>
     </mat-menu>
 
   </mat-drawer>
