@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { TranslateService } from '@ngx-translate/core';
-import { fromEvent, Observable, withLatestFrom, zipWith } from 'rxjs';
+import { fromEvent, withLatestFrom, zipWith } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Set } from './actions/i18n.actions';
 import { getLanguage, Language } from './reducers';

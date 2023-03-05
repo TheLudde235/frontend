@@ -6,17 +6,17 @@ export const hydrationMetaReducer = (
 ): ActionReducer<i18nState> => {
   return (state, action) => {
     if (action.type === INIT || action.type === UPDATE) {
-      const storageValue = localStorage.getItem("state");
+      const storageValue = localStorage.getItem("i18n");
       if (storageValue) {
         try {
           return JSON.parse(storageValue);
         } catch {
-          localStorage.removeItem("state");
+          localStorage.removeItem("i18n");
         }
       }
     }
     const nextState = reducer(state, action);
-    localStorage.setItem("state", JSON.stringify(nextState));
+    localStorage.setItem("i18n", JSON.stringify(nextState));
     return nextState;
   };
 };
