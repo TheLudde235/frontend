@@ -129,5 +129,8 @@
     "very_high": "Very High",
     "asap": "Asap",
     "past": "Past"
+  },
+  "deadline": {
+    "none": "None"
   }
 }

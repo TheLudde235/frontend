@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { forkJoin, map, Observable } from 'rxjs';
+import { forkJoin, map, Observable, of } from 'rxjs';
 import { PriorityColors } from 'src/assets/colors';
 import { environment } from 'src/environments/environment';
 import { Estate, Priority, Task } from '../data-types';
@@ -187,7 +187,10 @@ export class EstateComponent implements OnInit {
       });
   }
   date(isoDate: string) {
-    return new Date(isoDate).toLocaleDateString();
+    if (isoDate == null) {
+      return this._translateService.get('deadline.none')
+    }
+    return of(new Date(isoDate).toLocaleDateString());
   }
   getColor(priority: Priority) {
     return PriorityColors[priority];

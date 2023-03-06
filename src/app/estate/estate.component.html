@@ -38,11 +38,11 @@
   </div>
 
   <div class="tasks">
-    <button mat-raised-button (click)="prioritySort = true; sort(false)">
+    <button mat-raised-button (click)="prioritySort = true; sort(true)">
         {{ "page.estate.sort_priority" | translate }}
         <mat-icon matSuffix>{{prioritySort ? (reversed ? 'expand_more' : 'expand_less') : ''}}</mat-icon>
     </button>
-    <button mat-raised-button (click)="prioritySort = false; sort(false)">
+    <button mat-raised-button (click)="prioritySort = false; sort(true)">
       {{ "page.estate.sort_deadline" | translate }}
         <mat-icon matSuffix>{{!prioritySort ? (reversed ? 'expand_more' : 'expand_less') : ''}}</mat-icon>
     </button>
@@ -50,7 +50,7 @@
         <h2 class="task-info">{{ task.title }}</h2>
         <div class="task-info-container">
             <p class="task-info description">{{ task.description }}</p>
-            <p class="task-info deadline">{{'page.estate.deadline' | translate}}: {{date(task.deadline)}}</p>
+            <p class="task-info deadline">{{'page.estate.deadline' | translate}}: {{date(task.deadline) | async}}</p>
             <div class="task-info priority">
                 <div
                   class="priority-box"
