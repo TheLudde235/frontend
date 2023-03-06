@@ -40,11 +40,13 @@
       "confirm": "Skicka"
     },
     "mypages": {
-      "add_estate": "Lägg till Estate",
+      "add_estate": "Lägg till fastighet",
       "add_task": "Lägg till uppgift",
-      "estates": "Gods",
-      "tasks": "Uppgift",
-      "welcome": "Välkommen"
+      "estates": "Fastigheter",
+      "tasks": "Uppgifter",
+      "welcome": "Välkommen",
+      "remove_estate": "Ta bort fastighet",
+      "remove_task": "Ta bort uppgift"
     }
   },
   "errors": {
@@ -82,7 +84,14 @@
       "leave_empty": "Om ingen, lämna tom",
       "opened": "Öppnad",
       "priority": "Prioritet",
-      "title": "Titel"
+      "title": "Titel",
+      "description": "Beskrivning"
+    },
+    "estate": {
+      "city": "Stad",
+      "description": "Beskrivning",
+      "street": "Gata",
+      "streetnumber": "Gatunummer"
     }
   }
 }

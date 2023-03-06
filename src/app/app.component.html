@@ -29,8 +29,7 @@
       </a>
       <a href="/myestates" *ngIf="loggedIn" mat-list-item>
         <mat-icon>apartment</mat-icon>
-        <span>{{ "nav.myestates" | translate }}</span></a
-      >
+        <span>{{ "nav.myestates" | translate }}</span></a>
     </mat-nav-list>
     <button [matMenuTriggerFor]="menu" mat-icon-button class="settings-button">
       <mat-icon>settings</mat-icon>
@@ -42,20 +41,19 @@
           {{ "nav.settings.admin" | translate }}
         </span>
       </button>
-      <button [matMenuTriggerFor]="languages" mat-menu-item>
-        <mat-icon>language</mat-icon>
-        <span>
-          {{ "nav.settings.language" | translate }}
-        </span>
-      </button>
       <button *ngIf="loggedIn" mat-menu-item (click)="logout()">
         <mat-icon mat-list-icon>logout</mat-icon>
         <span>
           {{ "nav.logout" | translate }}
         </span>
       </button>
+      <button [matMenuTriggerFor]="languages" mat-menu-item>
+        <mat-icon>language</mat-icon>
+        <span>
+          {{ "nav.settings.language" | translate }}
+        </span>
+      </button>
     </mat-menu>
-
     <mat-menu #languages="matMenu">
       <button (click)="changeLanguage('eo')" mat-menu-item>Esperanto</button>
       <button (click)="changeLanguage('en')" mat-menu-item>English</button>

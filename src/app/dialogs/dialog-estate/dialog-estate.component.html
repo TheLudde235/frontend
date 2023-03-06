@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>{{ "dialog.task.add_task" | translate }}</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "dialog.estate.city" | translate }}</mat-label>
+    <input matInput [(ngModel)]="data.city" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "dialog.estate.street" | translate }}</mat-label>
+    <input matInput [(ngModel)]="data.street" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "dialog.estate.streetnumber" | translate }}</mat-label>
+    <input matInput [(ngModel)]="data.streetnumber" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "dialog.estate.description" | translate }}</mat-label>
+    <input matInput [(ngModel)]="data.description"/>
+  </mat-form-field>
+  
+
+  
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">
+    {{ "dialog.task.cancel" | translate }}
+  </button>
+  <button
+    mat-raised-button
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+    disabled="{{ !data.city || !data.street || !data.streetnumber }}"
+    color="primary"
+  >
+    Ok
+  </button>
+</div>
+

@@ -36,6 +36,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { DialogTaskComponent } from './dialogs/dialog-task/dialog-task.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
+import { DialogEstateComponent } from './dialogs/dialog-estate/dialog-estate.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -55,6 +56,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoadingSpinnerComponent,
     MyestatesComponent,
     DialogTaskComponent,
+    DialogEstateComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,8 +89,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
     StoreModule.forRoot(reducers, {metaReducers})

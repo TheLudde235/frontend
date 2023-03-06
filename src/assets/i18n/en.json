@@ -86,6 +86,12 @@
       "choose_deadline": "Choose deadline",
       "leave_empty": "If none, leave empty",
       "description": "Description"
+    },
+    "estate": {
+      "city": "City",
+      "street": "Street",
+      "streetnumber": "Streetnumber",
+      "description": "Description"
     }
   }
 }

@@ -10,10 +10,10 @@
         <mat-icon>task</mat-icon>    
         {{"page.mypages.tasks" | translate}}
     </a>
-    <a href="/createestate" mat-raised-button color="accent">
+    <button mat-raised-button color="accent" (click)="openEstateDialog()">
       <mat-icon> add </mat-icon>
       {{ "page.mypages.add_estate" | translate }}
-    </a>
+    </button>
     <button mat-raised-button color="accent" (click)="openAddTaskDialog()">
       <mat-icon> add </mat-icon>
       {{ "page.mypages.add_task" | translate }}

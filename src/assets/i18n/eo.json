@@ -64,7 +64,9 @@
       "add_task": "Aldoni Taskon",
       "estates": "Biendomoj",
       "tasks": "Tasko",
-      "welcome": "Bonvenon"
+      "welcome": "Bonvenon",
+      "remove_estate": "Forigi Bienon",
+      "remove_task": "Forigi Taskon"
     }
   },
   "server": {
@@ -82,7 +84,14 @@
       "leave_empty": "Se neniu, lasu malplena",
       "opened": "Malfermita",
       "priority": "Prioritato",
-      "title": "Titolo"
+      "title": "Titolo",
+      "description": "Priskribo"
+    },
+    "estate": {
+      "city": "Urbo",
+      "description": "Priskribo",
+      "street": "strato",
+      "streetnumber": "Stratnumero"
     }
   }
 }
