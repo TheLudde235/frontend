@@ -39,6 +39,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
 import { DialogEstateComponent } from './dialogs/dialog-estate/dialog-estate.component';
 import { DialogUpdateEstateComponent } from './dialogs/dialog-update-estate/dialog-update-estate.component';
+import { EstateComponent } from './estate/estate.component';
+import { DialogConfirmComponent } from './dialogs/dialog-confirm/dialog-confirm.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -60,6 +62,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DialogTaskComponent,
     DialogEstateComponent,
     DialogUpdateEstateComponent,
+    EstateComponent,
+    DialogConfirmComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,23 +1,40 @@
 {
+  "dialog": {
+    "estate": {
+      "city": "Urbo",
+      "description": "Priskribo",
+      "street": "strato",
+      "streetnumber": "Stratnumero"
+    },
+    "task": {
+      "add_task": "Aldoni Taskon",
+      "cancel": "Nuligi",
+      "choose_deadline": "Elektu limdaton",
+      "closed": "Fermita",
+      "description": "Priskribo",
+      "estate": "Biendomo",
+      "leave_empty": "Se neniu, lasu malplena",
+      "opened": "Malfermita",
+      "priority": "Prioritato",
+      "title": "Titolo"
+    }
+  },
   "errors": {
     "dialog": {
-      "server": {
-        "content": "Niaj serviloj malfunkcias, bonvolu provi ensaluti poste",
-        "title": "Servila eraro"
-      },
-      "failed_login": "Ensaluto malsukcesis"
+      "failed_login": "Ensaluto malsukcesis",
+      "wrong_username_or_password": "Malĝusta uzantnomo aŭ pasvorto"
     }
   },
   "nav": {
     "login": "Ensaluti",
+    "logout": "Elsaluti",
+    "myestates": "Biendomoj",
+    "mypages": "Miaj Paĝoj",
     "register": "Registru",
     "settings": {
       "admin": "Administraj agordoj",
       "language": "Lingvo"
-    },
-    "logout": "Elsaluti",
-    "myestates": "Biendomoj",
-    "mypages": "Miaj Paĝoj"
+    }
   },
   "page": {
     "admin": {
@@ -29,6 +46,10 @@
     "adminconfirmation": {
       "code": "Konfirma kodo",
       "confirm": "Submeti"
+    },
+    "estate": {
+      "delete": "Forigi",
+      "update": "Ĝisdatigo"
     },
     "login": {
       "admin": "Admin Ensaluto",
@@ -45,6 +66,15 @@
       "username": "Uzantnomo",
       "worker_Login": "Ensaluto de Laboristo"
     },
+    "mypages": {
+      "add_estate": "Aldonu Bienon",
+      "add_task": "Aldoni Taskon",
+      "estates": "Biendomoj",
+      "remove_estate": "Forigi Bienon",
+      "remove_task": "Forigi Taskon",
+      "tasks": "Tasko",
+      "welcome": "Bonvenon"
+    },
     "register": {
       "admin": "Registru Admin",
       "confirm_password": "Konfirmu pasvorton",
@@ -52,46 +82,23 @@
       "errors": {
         "different_password": "La pasvortoj estas malsamaj"
       },
+      "input_code": "Ĉu jam havas kodon?",
       "occupied_username": "Uzantnomo estas okupata",
       "register": "Registru",
       "required_email": "Retpoŝto estas postulata",
       "unique_email": "Retpoŝto estas okupata",
-      "valid_email": "Devas esti valida retpoŝto",
-      "input_code": "Ĉu jam havas kodon?"
-    },
-    "mypages": {
-      "add_estate": "Aldonu Bienon",
-      "add_task": "Aldoni Taskon",
-      "estates": "Biendomoj",
-      "tasks": "Tasko",
-      "welcome": "Bonvenon",
-      "remove_estate": "Forigi Bienon",
-      "remove_task": "Forigi Taskon"
+      "valid_email": "Devas esti valida retpoŝto"
     }
   },
   "server": {
     "error": {
-      "wrong_username_or_password": "Malĝusta uzantnomo aŭ pasvorto"
+      "content": "Niaj serviloj malfunkcias, bonvolu provi ensaluti poste",
+      "title": "Servila eraro"
     }
   },
-  "dialog": {
-    "task": {
-      "add_task": "Aldoni Taskon",
-      "cancel": "Nuligi",
-      "choose_deadline": "Elektu limdaton",
-      "closed": "Fermita",
-      "estate": "Biendomo",
-      "leave_empty": "Se neniu, lasu malplena",
-      "opened": "Malfermita",
-      "priority": "Prioritato",
-      "title": "Titolo",
-      "description": "Priskribo"
-    },
-    "estate": {
-      "city": "Urbo",
-      "description": "Priskribo",
-      "street": "strato",
-      "streetnumber": "Stratnumero"
-    }
+  "snackbar": {
+    "estate_added": "Biendomo aldonita sukcese",
+    "ok": "Bone",
+    "task_added": "Tasko aldonita sukcese"
   }
 }

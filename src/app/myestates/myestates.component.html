@@ -1,33 +1,42 @@
-<ng-container *ngIf="estates$ | async as estates">
+<ng-template #loader>
+  <app-loading-spinner [loading]="true"></app-loading-spinner>
+</ng-template>
+<ng-container *ngIf="estates$ | async as estates; else loader">
   <div class="estates">
-    <div>
-      <h1>{{ "page.mypages.estates" | translate }}</h1>
-      <button mat-icon-button (click)="refresh()">
-        <mat-icon>refresh</mat-icon>
-      </button>
-    </div>
+    <h1>{{ "page.mypages.estates" | translate }}</h1>
+    <button mat-raised-button color="accent" (click)="openEstateDialog()">
+      <mat-icon> add </mat-icon>
+      {{ "page.mypages.add_estate" | translate }}
+    </button>
+    <button mat-icon-button class="refresh-icon" (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
     <div class="estate" *ngFor="let estate of estates">
-      <a href="/estate/{{ estate.uuid }}">
+      <a href="/estate/{{ estate.estateuuid }}">
         <h2>{{ estate.city }}, {{ estate.street }}</h2>
       </a>
-      <h4>{{estate.streetnumber}}</h4>
+      <h4>{{ estate.streetnumber }}</h4>
       <p>{{ estate.description }}</p>
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>settings</mat-icon>
       </button>
       <mat-menu #menu>
-        <button mat-menu-item color="accent" (click)="addTask(estate.estateuuid)">
+        <button mat-menu-item (click)="addTask(estate.estateuuid)">
           <mat-icon>add</mat-icon>
-          {{'page.mypages.add_task' | translate}}
+          {{ "page.mypages.add_task" | translate }}
         </button>
-        <button mat-menu-item color="primary" (click)="update(estate)">
-          <mat-icon>upgrade</mat-icon>
-          {{'page.estate.update' | translate}}
+        <button mat-menu-item (click)="update(estate)">
+          <mat-icon>construction</mat-icon>
+          {{ "page.estate.update" | translate }}
         </button>
-        <button mat-menu-item color="warn" (click)="delete(estate.estateuuid)">
+        <button mat-menu-item (click)="delete(estate.estateuuid)">
           <mat-icon>delete</mat-icon>
-          {{'page.estate.delete' | translate}}
+          {{ "page.estate.delete" | translate }}
         </button>
+        <a href="/estate/{{estate.estateuuid}}" mat-menu-item>
+          <mat-icon>more_vert</mat-icon>
+          {{'page.myestates.more_actions' | translate}}
+        </a>
       </mat-menu>
     </div>
   </div>

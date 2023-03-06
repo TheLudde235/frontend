@@ -7,9 +7,11 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { catchError, forkJoin, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../services/auth.service';
 import { DialogOkComponent } from '../dialogs/dialog-ok/dialog-ok.component';
 import { SetSession } from '../store/actions/session.actions';
-import { Token } from '../token';
+import { Token } from '../data-types';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,13 +20,13 @@ import { Token } from '../token';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public _httpClient: HttpClient, public _dialog: MatDialog, public _translateService: TranslateService, private store: Store) { }
+  constructor(public _httpClient: HttpClient, public _dialog: MatDialog, public _translateService: TranslateService, private store: Store, private _authService: AuthService, private _router: Router) { }
 
   ngOnInit(): void {
   }
 
-  usernameValue: string = '';
-  passwordValue: string = '';
+  usernameValue: string = 'Terry';
+  passwordValue: string = 'Davis';
 
   usernameFormControl = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]*')]);
   passwordFormControl = new FormControl('', [Validators.required]);
@@ -35,39 +37,31 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.loading = true;
-    this._httpClient.post<any>(environment.endpoint + 'login', {
-      username: this.usernameValue,
-      password: this.passwordValue
-    }).pipe(
-      catchError((err, caught) => {
-        if (err.status == 0) {
+    this._authService.login(this.usernameValue, this.passwordValue).pipe(catchError((err, caught) => {
+      this.loading = false;
+      return of(err) ?? caught
+    })).subscribe((data) => {
+      this.loading = false;
+      if (data && data.err) {
+        if (data.status === 0) {
+          console.log(data);
           forkJoin([
-            this._translateService.get('errors.dialog.server.title'),
-            this._translateService.get('errors.dialog.server.content')
+            this._translateService.get('server.error.title'),
+            this._translateService.get('server.error.content')
           ]).subscribe(text => {
-            this.openDialog(text[0], text[1]);
-          });
-        } else if (err.error) {
-          forkJoin([
-            this._translateService.get('errors.dialog.failed_login'),
-            this._translateService.get(err.error.msg)
-          ]).subscribe(text =>{
-            this.openDialog(text[0], text[1]);
+            return this.openDialog(text[0], text[1])
           })
         }
-        return of(err) ?? caught;
-      })
-    ).subscribe(r => {
-      this.loading = false;
-      const user: Token = JSON.parse(atob(r.token.split('.')[1]));
-      console.log(user)
-      this.store.dispatch(new SetSession({
-        ...user,
-        token: r.token,
-        loggedIn: true
-      }))
-      location.href = '/mypages'
-    });
+        forkJoin([
+          this._translateService.get('server.error.failed_login'),
+          this._translateService.get(data.message)
+        ]).subscribe(text => {
+          return this.openDialog(text[0], text[1]);
+        })
+
+      }
+      this._router.navigateByUrl('/mypages');
+    })
   }
 
   openDialog(title: string, content: string): void {

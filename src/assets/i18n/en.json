@@ -50,7 +50,19 @@
     },
     "estate": {
       "delete": "Delete",
-      "update": "Update"
+      "update": "Update",
+      "add_worker": "Add Worker",
+      "task_deleted": "Task has been deleted",
+      "sort_priority": "Priority",
+      "sort_deadline": "Deadline",
+      "deadline": "Deadline",
+      "comments": "Comments",
+      "edit": "Edit",
+      "done": "Done",
+      "not_done": "Not done"
+    },
+    "myestates": {
+      "more_actions": "More actions"
     }
   },
   "nav": {
@@ -64,18 +76,12 @@
     "mypages": "My Pages",
     "myestates": "Estates"
   },
-  "errors": {
-    "dialog": {
-      "server": {
-        "title": "Server error",
-        "content": "Our servers are down, please try logging in later"
-      },
-      "failed_login": "Login Failed"
-    }
-  },
   "server": {
     "error": {
-      "wrong_username_or_password": "Wrong username or password"
+      "title": "Server error",
+      "content": "Our servers are down, please try logging in later",
+      "wrong_username_or_password": "Wrong username or password",
+      "failed_login": "Login Failed"
     }
   },
   "dialog": {
@@ -96,11 +102,32 @@
       "street": "Street",
       "streetnumber": "Streetnumber",
       "description": "Description"
+    },
+    "confirm": {
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "mark_done": "Mark done?",
+      "mark_not_done": "Mark not done?",
+      "mark_done_desc": "Are you sure you want to mark this task as done?",
+      "mark_not_done_desc": "Are you sure you want to unmark this as done?"
     }
   },
   "snackbar": {
     "task_added": "Task added succesfully",
     "ok": "Ok",
-    "estate_added": "Estate added succesfully"
+    "estate_added": "Estate added succesfully",
+    "estate_deleted": "Estate deleted",
+    "estate_updated": "Estate updated"
+  },
+  "priority": {
+    "none": "None",
+    "neutral": "neutral",
+    "very_low": "Very Low",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "very_high": "Very High",
+    "asap": "Asap",
+    "past": "Past"
   }
 }

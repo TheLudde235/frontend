@@ -31,7 +31,7 @@ export class WorkerGuard implements CanActivate {
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate{
+export class AdminGuard implements CanActivate {
   loggedIn: boolean = false;
   admin: boolean = false;
   constructor(private _store: Store<{session: Session}>, private _router: Router) {
@@ -48,5 +48,21 @@ export class AdminGuard implements CanActivate{
       this._router.navigateByUrl('/login');
       return false;
     }
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserGuard implements CanActivate {
+  loggedIn: boolean = false;
+  constructor(private _store: Store<{session: Session}>, private _router: Router) {
+    _store.select('session').subscribe(r => {
+      this.loggedIn = r.loggedIn;
+    });
+  }
+
+  canActivate() {
+    return this.loggedIn;
   }
 }

@@ -1,0 +1,68 @@
+.estate-options .mat-mdc-icon-button:not(.refresh-icon) {
+    position: absolute;
+    right: 0;
+    scale: 1.5;
+    top: 0;
+}
+.refresh-icon {
+    position: absolute;
+    scale: 1.5;
+    right: 0;
+}
+.task {
+    background-color: #444;
+    margin: 20px;
+    border-radius: 5px;
+    padding: 20px;
+    .task-info {
+        background-color: #333;
+        border-radius: 5px;
+        padding: 5px;
+    }
+    .description {
+        grid-area: desc;
+        min-height: 50px;
+    }
+    h2.task-info {
+        padding: 0 5px;
+    }
+    .task-settings {
+        position: absolute;
+        right: 30px;
+    }
+    .task-info-container {
+        display: grid;
+        gap: 0 10px;
+        grid-template-areas: 
+            "desc  priority"
+            "deadline  priority";
+        grid-template-columns: 70% auto;
+        grid-template-rows: 60% 40px;
+    }
+    .deadline {
+        grid-area: deadline;
+    }
+    .priority {
+        grid-area: priority;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        margin-block-end: 1em;
+        p {
+            margin: 0;
+        }
+    }
+}
+.priority-box {
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+}
+
+.task-actions {
+    justify-content: space-between;
+    max-width: 250px;
+    display: flex;
+}

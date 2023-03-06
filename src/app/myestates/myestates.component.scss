@@ -1,9 +1,24 @@
-.estate {
-  border: solid white;
-  border-radius: 20px;
+.estates {
   margin: 20px;
-  padding: 20px;
-  a {
-    color: white
+  .refresh-icon {
+    position: absolute;
+    right: 20px;
+    scale: 1.5;
+  }
+  .estate {
+    background-color: #444;
+    border-radius: 20px;
+    margin: 20px 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    a {
+      color: white
+    }
+    button {
+      right: 0;
+      position: relative;
+      align-self: flex-end;
+    }
   }
 }

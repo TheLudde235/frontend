@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import {Observable, catchError, of} from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import {Observable, catchError, of, forkJoin} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Estate } from '../data-types';
 import { DialogEstateComponent } from '../dialogs/dialog-estate/dialog-estate.component';
@@ -19,27 +21,20 @@ export class MyestatesComponent {
   estates$: Observable<Estate[]>;
   loading: boolean = false;
 
-  constructor(private store: Store<{session: Session}>, private _httpClient: HttpClient, public dialog: MatDialog) {
+  constructor(private store: Store<{session: Session}>, private _httpClient: HttpClient, private _dialog: MatDialog, private _translateService: TranslateService, private _snackbar: MatSnackBar) {
     this.estates$ = _httpClient.get<Estate[]>(environment.endpoint + 'myestates');
   }
 
 
   refresh() {
     this.loading = true;
-    this._httpClient.get<Estate[]>(environment.endpoint + 'myestates')
-      .pipe(
-        catchError((err, caught) => {
-          return of(err) ?? caught;
-        })
-      ).subscribe(r =>{
-        this.loading = false;
-        this.store.dispatch(new UpdateSession({estates: r}));
-      });
+    this.estates$ = this._httpClient.get<Estate[]>(environment.endpoint + 'myestates');
   }
 
   addTask(estateuuid: string) {
-    const dialogRef = this.dialog.open(DialogTaskComponent, {
+    const dialogRef = this._dialog.open(DialogTaskComponent, {
       data: {
+        estateuuid,
         title: '',
         priority: 0,
         deadline: 0,
@@ -49,21 +44,66 @@ export class MyestatesComponent {
     });
 
     dialogRef.afterClosed().subscribe(dialogData => {
-      this._httpClient.post(environment.endpoint + 'task/' + estateuuid, dialogData).subscribe(console.log);
+      if (!dialogData) return;
+      const {title, priority, deadline, open, description} = dialogData
+      this._httpClient.post(environment.endpoint + 'task/' + estateuuid, {title, priority, deadline, open, description}).subscribe(console.log);
     });
   }
 
-  update(data: Estate) {
-    const dialogRef = this.dialog.open(DialogEstateComponent, {
-      data: JSON.parse(JSON.stringify(data))
+  update(formData: Estate) {
+    const dialogRef = this._dialog.open(DialogEstateComponent, {
+      data: JSON.parse(JSON.stringify(formData))
     });
 
     dialogRef.afterClosed().subscribe(data => {
-      this._httpClient.put(environment.endpoint + 'estate/' + data.estateuuid, data).subscribe(console.log);
+      if (!data) return;
+      this.loading = true;
+      this._httpClient.put(environment.endpoint + 'estate/' + data.estateuuid, data).subscribe(data => {
+        forkJoin([
+          this._translateService.get('snackbar.estate_updated'),
+          this._translateService.get('snackbar.ok')
+        ]).subscribe(text => {
+          this._snackbar.open(text[0], text[1]);
+        })
+        this.refresh();
+      });
     });
   }
 
   delete(estateuuid: string) {
+    this._httpClient.delete(environment.endpoint + 'estate/' + estateuuid).subscribe(data => {
+      forkJoin([
+        this._translateService.get('snackbar.estate_deleted'),
+        this._translateService.get('snackbar.ok')
+      ]).subscribe(text => {
+        this._snackbar.open(text[0], text[1]);
+      })
+      this.refresh();
+    })
+  }
 
+  openEstateDialog() {
+    const dialogRef = this._dialog.open(DialogEstateComponent, {
+      data: {
+        city: '',
+        street: '',
+        streetnumber: '',
+        description: ''
+      }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (!res) return;
+      const {city, street, streetnumber,description} = res;
+      this._httpClient.post(environment.endpoint + 'registerestate', res).subscribe()
+        forkJoin([
+          this._translateService.get('snackbar.estate_added'),
+          this._translateService.get('snackbar.ok')
+        ]).subscribe(text => {
+          this._snackbar.open(text[0], text[1], {
+            duration: 5000
+          });
+          this.refresh();
+        })
+    });
   }
 }

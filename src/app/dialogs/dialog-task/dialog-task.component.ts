@@ -24,6 +24,8 @@ export interface DialogData {
 })
 export class DialogTaskComponent {
   estates$: Observable<Estate[]>;
+  notAuto: boolean = true;
+
   constructor(
     public dialogRef: MatDialogRef<DialogTaskComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -37,6 +39,9 @@ export class DialogTaskComponent {
       this._adapter.setLocale(r == 'sv' || r == 'eo' ? 'fr' : r);
     });
     this.estates$ = this._httpClient.get<Estate[]>(environment.endpoint + 'myestates');
+    if (data.estateuuid) {
+      this.notAuto = false;
+    }
   }
 
   onNoClick(): void {

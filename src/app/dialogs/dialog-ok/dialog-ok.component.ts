@@ -1,7 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from './IDialogData';
-
+interface DialogData {
+    title: string | undefined,
+    content: string | undefined,
+    color: string | undefined
+}
 @Component({
   selector: 'app-dialog-ok',
   templateUrl: './dialog-ok.component.html',

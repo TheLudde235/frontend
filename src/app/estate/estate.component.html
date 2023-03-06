@@ -1,0 +1,97 @@
+<ng-container *ngIf="data$ | async as data">
+  <h1>{{ data.estate.city }}, {{ data.estate.street }}</h1>
+  <div class="estate-options">
+      <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="isAdmin$ | async">
+        <mat-icon>settings</mat-icon>
+      </button>
+      <button mat-icon-button class="refresh-icon" (click)="refresh()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+  </div>
+  <mat-menu #menu>
+    <button mat-menu-item (click)="addTask(data.estate.estateuuid)">
+      <mat-icon>add</mat-icon>
+      {{ "page.mypages.add_task" | translate }}
+    </button>
+    <button mat-menu-item (click)="update(data.estate)">
+      <mat-icon>construction</mat-icon>
+      {{ "page.estate.update" | translate }}
+    </button>
+    <button mat-menu-item (click)="delete(data.estate.estateuuid)">
+      <mat-icon>delete</mat-icon>
+      {{ "page.estate.delete" | translate }}
+    </button>
+  </mat-menu>
+  <div class="actions" *ngIf="isAdmin$ | async">
+    <button mat-raised-button color="accent">
+      <mat-icon>add</mat-icon>
+      {{ "page.estate.add_worker" | translate }}
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="addTask(data.estate.estateuuid)"
+    >
+      <mat-icon>add</mat-icon>
+      {{ "page.mypages.add_task" | translate }}
+    </button>
+  </div>
+
+  <div class="tasks">
+    <button mat-raised-button (click)="prioritySort = true; sort(false)">
+        {{ "page.estate.sort_priority" | translate }}
+        <mat-icon matSuffix>{{prioritySort ? (reversed ? 'expand_more' : 'expand_less') : ''}}</mat-icon>
+    </button>
+    <button mat-raised-button (click)="prioritySort = false; sort(false)">
+      {{ "page.estate.sort_deadline" | translate }}
+        <mat-icon matSuffix>{{!prioritySort ? (reversed ? 'expand_more' : 'expand_less') : ''}}</mat-icon>
+    </button>
+    <div class="task" *ngFor="let task of data.tasks">
+        <h2 class="task-info">{{ task.title }}</h2>
+        <div class="task-info-container">
+            <p class="task-info description">{{ task.description }}</p>
+            <p class="task-info deadline">{{'page.estate.deadline' | translate}}: {{date(task.deadline)}}</p>
+            <div class="task-info priority">
+                <div
+                  class="priority-box"
+                  *ngIf="!task.completed"
+                  [ngStyle]="{ 'background-color': getColor(task.priority) }"
+                >
+              </div>
+              <p class="priority-text">
+                  {{getPriority(task.priority) | translate}}
+          
+              </p>
+            </div>
+        </div>
+        <button mat-icon-button class="task-settings" [matMenuTriggerFor]="taskMenu">
+            <mat-icon>settings</mat-icon>
+        </button>
+      <mat-menu #taskMenu yPosition="above">
+        <button mat-menu-item>
+            <mat-icon>edit</mat-icon>
+            {{'page.estate.edit' | translate}}
+        </button>
+        <button mat-menu-item>
+            <mat-icon>delete</mat-icon>
+            {{'page.estate.delete' | translate}}
+        </button>
+      </mat-menu>
+      <div class="task-actions" >
+          <button mat-raised-button color="primary">
+          {{'page.estate.comments' | translate}}  
+          </button>
+          <button mat-raised-button color="{{task.completed ? 'accent' : 'warn' }}" (click)="toggleDone(task)">
+            {{ (task.completed ? 'page.estate.done' :'page.estate.not_done') | translate}}
+            <mat-icon *ngIf="task.completed">done</mat-icon>
+            <mat-icon *ngIf="!task.completed">close</mat-icon>
+          </button>
+      </div>
+    </div>
+  </div>
+
+  <pre>
+        {{ data | json }}
+    </pre
+  >
+</ng-container>

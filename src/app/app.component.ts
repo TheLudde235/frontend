@@ -8,6 +8,8 @@ import { ResetSession } from './store/actions/session.actions';
 import { Language, Session } from './store/models/runtime';
 import { DialogOkComponent } from './dialogs/dialog-ok/dialog-ok.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -20,34 +22,25 @@ export class AppComponent {
   @ViewChild('drawer')
   public drawer!: MatDrawer;
   public loggedIn: boolean = false;
-  public session: Session | undefined;
 
-  constructor (private _translate: TranslateService, private store: Store<{lang: string, session: Session}>, private _dialog: MatDialog) {
+  constructor (private _translate: TranslateService, private store: Store<{lang: string, session: Session}>, private _dialog: MatDialog, private _authService: AuthService, private _router: Router) {
     store.select('lang').subscribe(data => {
       _translate.use(data);
     });
     store.select('session').subscribe(data => {
       this.loggedIn = data.loggedIn;
-      this.session = data;
     })
   }
   
-  openDialog() {
-    this._dialog.open(DialogOkComponent, {
-      data: {
-        title: 'Data',
-        content: this.session
-      }
-    })
-  }
-
   changeLanguage(lang: Language) {
     this.store.dispatch(new Set(lang));
   }
 
-  logout( ){
-    this.store.dispatch(new ResetSession());
+  logout() {
+    this._authService.logout();
+    this._router.navigateByUrl('/');
   }
+  
   ngAfterViewInit(): void {
   fromEvent<TouchEvent>(document, 'touchstart')
     .pipe(
