@@ -6,7 +6,6 @@ export const initialState: Session = {
     uuid: '',
     username: '',
     email: '',
-    estates: [],
     loggedIn: false,
     admin: false
 }

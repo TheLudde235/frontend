@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminconfirmationComponent } from './adminconfirmation/adminconfirmation.component';
 import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
+import { MyestatesComponent } from './myestates/myestates.component';
 import { MypagesComponent } from './mypages/mypages.component';
 import { OnylLoggedInGuard } from './onyl-logged-in.guard';
 import { RegisterComponent } from './register/register.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'adminconfirmation', component: AdminconfirmationComponent},
   { path: 'workerlogin', component: WorkerloginComponent},
+  { path: 'myestates', canActivate: [OnylLoggedInGuard], component: MyestatesComponent},
   { path: 'mypages', canActivate: [OnylLoggedInGuard], component: MypagesComponent},
   { path: '**', redirectTo: ''}
 ];

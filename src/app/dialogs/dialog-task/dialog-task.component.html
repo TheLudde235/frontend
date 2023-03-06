@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>{{ "dialog.task.add_task" | translate }}</h1>
-<div mat-dialog-content>
+<div mat-dialog-content *ngIf="estates$ | async as estates">
   <mat-form-field appearance="fill">
     <mat-label>{{ "dialog.task.estate" | translate }}</mat-label>
     <mat-select [(value)]="data.estateuuid" required>

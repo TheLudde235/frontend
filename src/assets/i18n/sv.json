@@ -66,7 +66,7 @@
       "language": "Språk"
     },
     "logout": "Logga ut",
-    "myestates": "Gods",
+    "myestates": "Fastigheter",
     "mypages": "Mina sidor"
   },
   "server": {
@@ -93,5 +93,10 @@
       "street": "Gata",
       "streetnumber": "Gatunummer"
     }
+  },
+  "snackbar": {
+    "estate_added": "Fastighet har lagts till",
+    "ok": "Ok",
+    "task_added": "Uppgiften har lagts till"
   }
 }

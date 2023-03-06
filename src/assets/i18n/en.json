@@ -47,6 +47,10 @@
       "add_task": "Add Task",
       "remove_estate": "Remove Estate",
       "remove_task": "Remove Task"
+    },
+    "estate": {
+      "delete": "Delete",
+      "update": "Update"
     }
   },
   "nav": {
@@ -93,5 +97,10 @@
       "streetnumber": "Streetnumber",
       "description": "Description"
     }
+  },
+  "snackbar": {
+    "task_added": "Task added succesfully",
+    "ok": "Ok",
+    "estate_added": "Estate added succesfully"
   }
 }

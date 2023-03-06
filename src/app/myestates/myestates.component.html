@@ -1,4 +1,4 @@
-<ng-container *ngIf="session$ | async as session">
+<ng-container *ngIf="estates$ | async as estates">
   <div class="estates">
     <div>
       <h1>{{ "page.mypages.estates" | translate }}</h1>
@@ -6,12 +6,29 @@
         <mat-icon>refresh</mat-icon>
       </button>
     </div>
-    <div class="estate" *ngFor="let estate of session.estates">
+    <div class="estate" *ngFor="let estate of estates">
       <a href="/estate/{{ estate.uuid }}">
         <h2>{{ estate.city }}, {{ estate.street }}</h2>
       </a>
       <h4>{{estate.streetnumber}}</h4>
       <p>{{ estate.description }}</p>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>settings</mat-icon>
+      </button>
+      <mat-menu #menu>
+        <button mat-menu-item color="accent" (click)="addTask(estate.estateuuid)">
+          <mat-icon>add</mat-icon>
+          {{'page.mypages.add_task' | translate}}
+        </button>
+        <button mat-menu-item color="primary" (click)="update(estate)">
+          <mat-icon>upgrade</mat-icon>
+          {{'page.estate.update' | translate}}
+        </button>
+        <button mat-menu-item color="warn" (click)="delete(estate.estateuuid)">
+          <mat-icon>delete</mat-icon>
+          {{'page.estate.delete' | translate}}
+        </button>
+      </mat-menu>
     </div>
   </div>
 </ng-container>

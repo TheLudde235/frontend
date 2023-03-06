@@ -19,6 +19,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatListModule} from '@angular/material/list';
 import { RegisterComponent } from './register/register.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { WorkerloginComponent } from './workerlogin/workerlogin.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -37,6 +38,7 @@ import { DialogTaskComponent } from './dialogs/dialog-task/dialog-task.component
 import {MatSelectModule} from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
 import { DialogEstateComponent } from './dialogs/dialog-estate/dialog-estate.component';
+import { DialogUpdateEstateComponent } from './dialogs/dialog-update-estate/dialog-update-estate.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -57,6 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MyestatesComponent,
     DialogTaskComponent,
     DialogEstateComponent,
+    DialogUpdateEstateComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     MatNativeDateModule,
     MatIconModule,
+    MatSnackBarModule,
     MatDatepickerModule,
     MatToolbarModule,
     MatButtonModule,

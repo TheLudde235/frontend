@@ -1,4 +1,3 @@
-import { Estate } from "src/app/data-types";
 
 export type Language = 'en' | 'sv' | 'eo';
 
@@ -7,7 +6,6 @@ export type Session = {
     uuid: string,
     username: string,
     email: string,
-    estates: Estate[],
     loggedIn: boolean,
     admin: boolean
 }

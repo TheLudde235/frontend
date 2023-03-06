@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Session } from '../store/models/runtime';
-import { Observable, catchError, of } from 'rxjs'
+import { Observable, catchError, of, forkJoin } from 'rxjs'
 import { Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -8,6 +8,8 @@ import { UpdateSession } from '../store/actions/session.actions';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogTaskComponent } from '../dialogs/dialog-task/dialog-task.component';
 import { DialogEstateComponent } from '../dialogs/dialog-estate/dialog-estate.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-mypages',
@@ -18,7 +20,7 @@ export class MypagesComponent {
   session$: Observable<Session>
   loading: boolean = false;
 
-  constructor(private store: Store<{session: Session}>, private _httpClient: HttpClient, public _dialog: MatDialog) {
+  constructor(private store: Store<{session: Session}>, private _httpClient: HttpClient, public _dialog: MatDialog, private _snackbar: MatSnackBar, private _translateService: TranslateService) {
     this.session$ = store.select('session');
   }
 
@@ -34,7 +36,15 @@ export class MypagesComponent {
     dialogRef.afterClosed().subscribe(res => {
       if (!res) return;
       const {city, street, streetnumber,description} = res;
-      this._httpClient.post(environment.endpoint + 'registerestate', res).subscribe(console.log)
+      this._httpClient.post(environment.endpoint + 'registerestate', res).subscribe()
+        forkJoin([
+          this._translateService.get('snackbar.estate_added'),
+          this._translateService.get('snackbar.ok')
+        ]).subscribe(text => {
+          this._snackbar.open(text[0], text[1], {
+            duration: 5000
+          });
+        })
     });
   }
 
@@ -45,7 +55,7 @@ export class MypagesComponent {
         estateuuid: '',
         priority: 0,
         deadline: 0,
-        open: true
+        open: false
       }
     });
     dialogRef.afterClosed().subscribe(res => {
@@ -58,7 +68,16 @@ export class MypagesComponent {
         deadline,
         description,
         open
-      }).subscribe(console.log)
+      }).subscribe(res => {
+        forkJoin([
+          this._translateService.get('snackbar.task_added'),
+          this._translateService.get('snackbar.ok')
+        ]).subscribe(text => {
+          this._snackbar.open(text[0], text[1], {
+            duration: 5000
+          });
+        })
+      })
     })
   }
 
