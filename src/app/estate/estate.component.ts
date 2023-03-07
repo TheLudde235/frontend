@@ -65,17 +65,17 @@ export class EstateComponent implements OnInit {
     
     sortFunctions = {
       priority: (a: Task, b: Task) => {
-      if (a.completed && b.completed) return 0;
-      if (b.completed) return -1;
-      if (a.completed) return 1;
-      return b.priority - a.priority;
-    },
-    deadline: (a: Task, b: Task) => {
-      if (a.deadline == null && b.deadline == null) return 0;
-      if (a.deadline == null) return 1;
-      if (b.deadline == null) return -1;
-      return a.deadline < b.deadline ? -1 : a.deadline > b.deadline ? 1 : 0;
-    },
+        if (a.completed && b.completed) return 0;
+        if (b.completed) return -1;
+        if (a.completed) return 1;
+        return b.priority - a.priority;
+      },
+      deadline: (a: Task, b: Task) => {
+        if (a.deadline == null && b.deadline == null) return this.sortFunctions.priority(a, b);
+        if (a.deadline == null) return 1;
+        if (b.deadline == null) return -1;
+        return a.deadline < b.deadline ? -1 : a.deadline > b.deadline ? 1 : 0;
+      },
   };
 
   sortFn = this.sortFunctions.priority;

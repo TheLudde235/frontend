@@ -54,13 +54,11 @@
             <div class="task-info priority">
                 <div
                   class="priority-box"
-                  *ngIf="!task.completed"
-                  [ngStyle]="{ 'background-color': getColor(task.priority) }"
+                  [ngStyle]="{ 'background-color': task.completed ? 'transparent' : getColor(task.priority) }"
                 >
               </div>
               <p class="priority-text">
-                  {{getPriority(task.priority) | translate}}
-          
+                  {{( task.completed ? 'page.estate.done' : getPriority(task.priority)) | translate}}
               </p>
             </div>
         </div>
@@ -89,9 +87,4 @@
       </div>
     </div>
   </div>
-
-  <pre>
-        {{ data | json }}
-    </pre
-  >
 </ng-container>
