@@ -1,5 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-import { CssSelector } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -7,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin, map, Observable, of } from 'rxjs';
-import { PriorityColors } from 'src/assets/colors';
+import { PriorityColors } from '../colors';
 import { environment } from 'src/environments/environment';
 import { Estate, Priority, Task } from '../data-types';
 import { DialogConfirmComponent } from '../dialogs/dialog-confirm/dialog-confirm.component';
