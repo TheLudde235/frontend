@@ -28,7 +28,7 @@ import {MatProgressSpinnerModule, MatSpinner} from '@angular/material/progress-s
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {MatMenuModule} from '@angular/material/menu';
-import { AdminconfirmationComponent } from './adminconfirmation/adminconfirmation.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { reducers, metaReducers } from './store/reducers';
 import { MypagesComponent } from './mypages/mypages.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
@@ -41,6 +41,7 @@ import { DialogEstateComponent } from './dialogs/dialog-estate/dialog-estate.com
 import { DialogUpdateEstateComponent } from './dialogs/dialog-update-estate/dialog-update-estate.component';
 import { EstateComponent } from './estate/estate.component';
 import { DialogConfirmComponent } from './dialogs/dialog-confirm/dialog-confirm.component';
+import { RegisterWorkerComponent } from './register-worker/register-worker.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -55,7 +56,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegisterComponent,
     WorkerloginComponent,
     DialogOkComponent,
-    AdminconfirmationComponent,
+    ConfirmationComponent,
     MypagesComponent,
     LoadingSpinnerComponent,
     MyestatesComponent,
@@ -64,6 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DialogUpdateEstateComponent,
     EstateComponent,
     DialogConfirmComponent,
+    RegisterWorkerComponent,
   ],
   imports: [
     BrowserModule,

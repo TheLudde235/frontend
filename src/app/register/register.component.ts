@@ -104,7 +104,7 @@ export class RegisterComponent implements OnInit {
   }
 
   formIsDone() {
-    return Object.keys({...this.usernameFormControl.errors, ...this.emailFormControl.errors, ...this.password1FormControl.errors, ...this.password2FormControl.errors}).length >= 1;
+    return Object.keys({...this.usernameFormControl.errors, ...this.emailFormControl.errors, ...this.password1FormControl.errors, ...this.password2FormControl.errors}).length < 1;
   }
 
   register(): void {
@@ -118,8 +118,8 @@ export class RegisterComponent implements OnInit {
       catchError((err, caught) => {
          if (err.status == 0) {
           const dialogContent = forkJoin([
-            this._translateService.get('errors.dialog.server.title'),
-            this._translateService.get('errors.dialog.server.content')
+            this._translateService.get('server.error.title'),
+            this._translateService.get('server.error.content')
           ]).subscribe(text => {
             this.openDialog(text[0], text[1]);
           });
@@ -129,10 +129,9 @@ export class RegisterComponent implements OnInit {
         return of(err) ?? caught;
       })
     )
-    .subscribe(res => {
+    .subscribe(() => {
       this.loading = false;
-      console.log(res)
-      // this._router.navigate(['/adminconfirmation']);
+      this._router.navigateByUrl('/confirmation/adminregister')
     });
   }
 

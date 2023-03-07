@@ -33,7 +33,8 @@
       "errors": {
         "different_password": "The passwords are different"
       },
-      "input_code": "Already have a code?"
+      "input_code": "Already have a code?",
+      "worker_register": "Register as worker"
     },
     "adminconfirmation": {
       "code": "Confirmation code",
@@ -63,6 +64,13 @@
     },
     "myestates": {
       "more_actions": "More actions"
+    },
+    "worker_register": {
+      "worker": "Register Worker",
+      "firstname": "Firstname",
+      "lastname": "Lastname",
+      "submit": "Submit",
+      "phone": "Phonenumber"
     }
   },
   "nav": {
@@ -109,7 +117,12 @@
       "mark_done": "Mark done?",
       "mark_not_done": "Mark not done?",
       "mark_done_desc": "Are you sure you want to mark this task as done?",
-      "mark_not_done_desc": "Are you sure you want to unmark this as done?"
+      "mark_not_done_desc": "Are you sure you want to unmark this as done?",
+      "delete_estate": "Are you sure you want to delete this estate?",
+      "delete_task": "Are you sure you want to delete this task?"
+    },
+    "title": {
+      "are_you_sure": "Are you sure?"
     }
   },
   "snackbar": {
@@ -117,7 +130,8 @@
     "ok": "Ok",
     "estate_added": "Estate added succesfully",
     "estate_deleted": "Estate deleted",
-    "estate_updated": "Estate updated"
+    "estate_updated": "Estate updated",
+    "task_deleted": "Task deleted"
   },
   "priority": {
     "none": "None",
@@ -127,7 +141,7 @@
     "medium": "Medium",
     "high": "High",
     "very_high": "Very High",
-    "asap": "Asap",
+    "asap": "ASAP",
     "past": "Past"
   },
   "deadline": {

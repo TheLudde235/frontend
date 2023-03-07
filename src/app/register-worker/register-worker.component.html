@@ -1,0 +1,139 @@
+<form #form="ngForm" (submit)="register()">
+  <h2>
+    {{ "page.worker_register.worker" | translate }}
+  </h2>
+
+
+  <div class="form-input">
+    <mat-form-field
+      class="register-form-field"
+      color="{{ emailUnique ? 'accent' : 'primary' }}"
+    >
+      <mat-label>
+        {{ "page.register.email" | translate }}
+      </mat-label>
+
+      <input
+        [errorStateMatcher]="esMatcher"
+        [(ngModel)]="worker.email"
+        [formControl]="emailFormControl"
+        name="email"
+        (input)="validateEmail()"
+        type="text"
+        matInput
+      />
+
+      <button
+        *ngIf="worker.email"
+        (click)="worker.email = ''"
+        type="button"
+        matSuffix
+        mat-icon-button
+        tabindex="-1"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+
+      <mat-error *ngIf="emailFormControl.hasError('pattern')">
+        {{ "page.register.valid_email" | translate }}
+      </mat-error>
+
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        {{ "page.register.required_email" | translate }}
+      </mat-error>
+
+      <mat-error *ngIf="emailFormControl.errors?.['notUnique']">
+        {{ "page.register.unique_email" | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-icon
+      class="done-icon"
+      color="{{ emailUnique && !emailFormControl.errors ? 'accent' : 'warn' }}"
+    >
+      {{ emailUnique && !emailFormControl.errors ? "done" : "close" }}
+    </mat-icon>
+  </div> 
+  <div class="form-input">
+
+  <mat-form-field class="register-form-field">
+    <mat-label>{{'page.worker_register.phone' | translate}}</mat-label>
+    
+    <input type="text"
+    [(ngModel)]="worker.phone"
+    name="phone"
+    matInput
+    required>
+
+
+      <button
+        *ngIf="worker.phone"
+        (click)="worker.phone = ''"
+        tabindex="-1"
+        type="button"
+        matSuffix
+        mat-icon-button
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+</mat-form-field>
+  </div>
+  <div class="form-input">
+
+  <mat-form-field
+      class="register-form-field"
+    >
+      <mat-label>
+        {{ "page.worker_register.firstname" | translate }}
+      </mat-label>
+      <input
+        [(ngModel)]="worker.firstname"
+        type="text"
+        name="first"
+        matInput
+        required
+      />
+
+      <button
+        *ngIf="worker.firstname"
+        (click)="worker.firstname = ''"
+        tabindex="-1"
+        type="button"
+        matSuffix
+        mat-icon-button
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field> 
+  </div>
+    <div class="form-input">
+
+    <mat-form-field
+      class="register-form-field"
+    >
+      <mat-label>
+        {{ "page.worker_register.lastname" | translate }}
+      </mat-label>
+      <input
+        [(ngModel)]="worker.lastname"
+        type="text"
+        name="last"
+        matInput
+        required
+      />
+
+      <button
+        *ngIf="worker.lastname"
+        (click)="worker.lastname = ''"
+        tabindex="-1"
+        type="button"
+        matSuffix
+        mat-icon-button
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+
+</div>
+    <button type="submit" mat-raised-button color="primary" disabled="{{!worker.email || !worker.phone || !worker.firstname || !worker.lastname || !formIsDone()}}">{{'page.worker_register.submit' | translate}}</button>
+</form>

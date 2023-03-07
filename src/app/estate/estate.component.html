@@ -13,11 +13,11 @@
       <mat-icon>add</mat-icon>
       {{ "page.mypages.add_task" | translate }}
     </button>
-    <button mat-menu-item (click)="update(data.estate)">
+    <button mat-menu-item (click)="updateEstate(data.estate)">
       <mat-icon>construction</mat-icon>
       {{ "page.estate.update" | translate }}
     </button>
-    <button mat-menu-item (click)="delete(data.estate.estateuuid)">
+    <button mat-menu-item (click)="deleteEstate(data.estate.estateuuid)">
       <mat-icon>delete</mat-icon>
       {{ "page.estate.delete" | translate }}
     </button>
@@ -73,17 +73,26 @@
               !taskInfoContainer.classList.contains('long')
             "
             class="gradient"
-          >
-        </div>
+          ></div>
           <p>{{ task.description }}</p>
         </div>
-
 
         <p class="task-info deadline">
           {{ "page.estate.deadline" | translate }}:
           {{ date(task.deadline) | async }}
         </p>
-        <div class="task-info priority">
+        <div
+          class="task-info priority {{
+            taskInfoContainer.classList.contains('long') ? 'long' : ''
+          }} {{
+            task.priority == 0 ? 'none' : ''
+          }}"
+          style="background-color: {{
+            taskInfoContainer.classList.contains('long')
+              ? getColor(task.priority)
+              : ''
+          }};"
+        >
           <div
             class="priority-box"
             [ngStyle]="{
@@ -91,7 +100,10 @@
                 ? 'transparent'
                 : getColor(task.priority)
             }"
-          ></div>
+            *ngIf="!taskInfoContainer.classList.contains('long')"
+          >
+            <mat-icon *ngIf="task.completed" class="priority-done-icon">done</mat-icon>
+        </div>
           <p class="priority-text">
             {{
               (task.completed ? "page.estate.done" : getPriority(task.priority))
@@ -104,15 +116,16 @@
         mat-icon-button
         class="task-settings"
         [matMenuTriggerFor]="taskMenu"
+        *ngIf="isAdmin$ | async"
       >
         <mat-icon>settings</mat-icon>
       </button>
       <mat-menu #taskMenu yPosition="above">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="updateTask(task)">
           <mat-icon>edit</mat-icon>
           {{ "page.estate.edit" | translate }}
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="deleteTask(task.taskuuid)">
           <mat-icon>delete</mat-icon>
           {{ "page.estate.delete" | translate }}
         </button>

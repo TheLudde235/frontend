@@ -38,13 +38,13 @@ export interface Comment {
 }
 
 export interface Worker {
-    workeruuid: string;
+    workeruuid?: string;
     email: string;
     firstname: string;
     lastname: string;
     phone: string;
-    skills: string;
-    image: string;
+    skills?: string;
+    image?: string;
 }
 
 export type Priority = 0 | 32 | 64 | 96 | 128 | 160 | 192 | 224 | 256

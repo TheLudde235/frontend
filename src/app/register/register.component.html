@@ -203,9 +203,14 @@
     </mat-icon>
   </div>
   <div class="form-footer">
-    <button mat-raised-button color="primary" disabled="{{ formIsDone() }}">
-      {{ "page.register.register" | translate }}
-    </button>
+    <div class="register-buttons">
+      <button mat-raised-button color="primary" disabled="{{ !formIsDone() }}">
+        {{ "page.register.register" | translate }}
+      </button>
+      <a href="/registerworker" mat-raised-button color="accent">{{
+        "page.register.worker_register" | translate
+      }}</a>
+    </div>
     <a mat-raised-button href="/adminconfirmation" color="primary">
       {{ "page.register.input_code" | translate }}
     </a>

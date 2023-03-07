@@ -20,7 +20,6 @@ interface EstateData {
   workers: Worker[];
 }
 
-
 @Component({
   selector: 'app-estate',
   templateUrl: './estate.component.html',
@@ -32,7 +31,7 @@ export class EstateComponent implements OnInit {
   prioritySort: boolean = true;
   isAdmin$: Observable<boolean>;
   reversed = false;
-  
+
   constructor(
     private route: ActivatedRoute,
     private _httpClient: HttpClient,
@@ -41,51 +40,79 @@ export class EstateComponent implements OnInit {
     private _translateService: TranslateService,
     private _router: Router,
     private store: Store<{ session: Session }>
-    ) {
-      this.isAdmin$ = store
+  ) {
+    this.isAdmin$ = store
       .select('session')
       .pipe(map((session) => session.admin));
-    }
-    
-    PriorityEnum = {
-      0: 'priority.none',
-      32: 'priority.neutral',
-      64: 'priority.very_low',
-      96: 'priority.low',
-      128: 'priority.medium',
-      160: 'priority.high',
-      192: 'priority.very_high',
-      224: 'priority.asap',
-      256: 'priority.past',
-    }
-    
-    ngOnInit() {
-      this.refresh();
-    }
-    
-    sortFunctions = {
-      priority: (a: Task, b: Task) => {
-        if (a.completed && b.completed) return 0;
-        if (b.completed) return -1;
-        if (a.completed) return 1;
-        return b.priority - a.priority;
-      },
-      deadline: (a: Task, b: Task) => {
-        if (a.deadline == null && b.deadline == null) return this.sortFunctions.priority(a, b);
-        if (a.deadline == null) return 1;
-        if (b.deadline == null) return -1;
-        return a.deadline < b.deadline ? -1 : a.deadline > b.deadline ? 1 : 0;
-      },
+  }
+
+  PriorityEnum = {
+    0: 'priority.none',
+    32: 'priority.neutral',
+    64: 'priority.very_low',
+    96: 'priority.low',
+    128: 'priority.medium',
+    160: 'priority.high',
+    192: 'priority.very_high',
+    224: 'priority.asap',
+    256: 'priority.past',
   };
 
-  sortFn = this.sortFunctions.priority;
+  ngOnInit() {
+    this.refresh();
+  }
+
+  sortFunctions = {
+    priority: (a: Task, b: Task) => {
+      if (a.completed && b.completed) return 0;
+      if (b.completed) return -1;
+      if (a.completed) return 1;
+
+      return b.priority - a.priority;
+    },
+    priorityReverse: (a: Task, b: Task) => {
+      if (a.completed && b.completed) return 0;
+      if (b.completed) return -1;
+      if (a.completed) return 1;
+
+      return a.priority - b.priority;
+    },
+    deadline: (a: Task, b: Task) => {
+      if (b.completed) return -1;
+      if (a.completed) return 1;
+      if (a.deadline == null && b.deadline == null)
+        return this.sortFunctions.priority(a, b);
+      if (a.deadline == null) return 1;
+      if (b.deadline == null) return -1;
+
+      return a.deadline < b.deadline ? -1 : a.deadline > b.deadline ? 1 : 0;
+    },
+    deadlineReverse: (a: Task, b: Task) => {
+      if (b.completed) return -1;
+      if (a.completed) return 1;
+      if (a.deadline == null && b.deadline == null)
+        return this.sortFunctions.priorityReverse(a, b);
+      if (a.deadline == null) return 1;
+      if (b.deadline == null) return -1;
+
+      return a.deadline < b.deadline ? 1 : a.deadline > b.deadline ? -1 : 0;
+    },
+  };
+
+  getFunction(priority: boolean, reverse: boolean) {
+    if (!reverse) {
+      return priority
+        ? this.sortFunctions.priority
+        : this.sortFunctions.deadline;
+    }
+    return priority
+      ? this.sortFunctions.priorityReverse
+      : this.sortFunctions.deadlineReverse;
+  }
 
   previousSort = !this.prioritySort;
 
   sort(click: boolean) {
-    this.sortFn = this.prioritySort
-      ? this.sortFunctions.priority
-      : this.sortFunctions.deadline;
     if (this.previousSort == this.prioritySort && click) {
       this.reversed = !this.reversed;
     } else {
@@ -95,9 +122,13 @@ export class EstateComponent implements OnInit {
     this.data$ = this.data$?.pipe(
       map((estateData) => {
         if (this.reversed) {
-          estateData.tasks.sort(this.sortFn).reverse();
+          estateData.tasks.sort(
+            this.getFunction(this.prioritySort, this.reversed)
+          );
         } else {
-          estateData.tasks.sort(this.sortFn);
+          estateData.tasks.sort(
+            this.getFunction(this.prioritySort, this.reversed)
+          );
         }
         return estateData;
       })
@@ -110,7 +141,7 @@ export class EstateComponent implements OnInit {
       this.loading = false;
       this.data$ = this._httpClient.get<EstateData>(
         environment.endpoint + 'estate/' + params['estateuuid']
-      )
+      );
       this.sort(false);
     });
   }
@@ -150,7 +181,7 @@ export class EstateComponent implements OnInit {
     });
   }
 
-  update(formData: Estate) {
+  updateEstate(formData: Estate) {
     const dialogRef = this._dialog.open(DialogEstateComponent, {
       data: JSON.parse(JSON.stringify(formData)),
     });
@@ -172,22 +203,88 @@ export class EstateComponent implements OnInit {
     });
   }
 
-  delete(estateuuid: string) {
-    this._httpClient
-      .delete(environment.endpoint + 'estate/' + estateuuid)
-      .subscribe((data) => {
-        forkJoin([
-          this._translateService.get('snackbar.estate_deleted'),
-          this._translateService.get('snackbar.ok'),
-        ]).subscribe((text) => {
-          this._snackbar.open(text[0], text[1], { duration: 3000 });
-          this._router.navigateByUrl('/mypages');
-        });
+  deleteEstate(estateuuid: string) {
+    forkJoin([
+      this._translateService.get('dialog.title.are_you_sure'),
+      this._translateService.get('dialog.confirm.delete_estate'),
+    ]).subscribe((text) => {
+      const dialogRef = this._dialog.open(DialogConfirmComponent, {
+        data: { title: text[0], content: text[1], color: 'warn' },
       });
+      dialogRef.afterClosed().subscribe((confirmed) => {
+        if (!confirmed) return;
+
+        this._httpClient
+          .delete(environment.endpoint + 'estate/' + estateuuid)
+          .subscribe((data) => {
+            forkJoin([
+              this._translateService.get('snackbar.estate_deleted'),
+              this._translateService.get('snackbar.ok'),
+            ]).subscribe((text) => {
+              this._snackbar.open(text[0], text[1], { duration: 3000 });
+              this._router.navigateByUrl('/mypages');
+            });
+          });
+      });
+    });
   }
+
+  deleteTask(taskuuid: string) {
+    forkJoin([
+      this._translateService.get('dialog.title.are_you_sure'),
+      this._translateService.get('dialog.confirm.delete_task')
+    ]).subscribe(text => {
+      const dialogRef = this._dialog.open(DialogConfirmComponent, {
+        data: {title: text[0], content: text[1], color: 'warn'}
+      });
+      dialogRef.afterClosed().subscribe(confirmed => {
+        if (!confirmed) return;
+
+        this._httpClient.delete(environment.endpoint + 'task/' + taskuuid)
+        .subscribe(data => {
+          forkJoin([
+            this._translateService.get('snackbar.task_deleted'),
+            this._translateService.get('snackbar.ok')
+          ]).subscribe(text => {
+            this._snackbar.open(text[0], text[1], {duration: 3000});
+            this.refresh();
+          })
+        })
+      })
+    })
+  }
+
+  updateTask(task: Task) {
+    const dialogRef = this._dialog.open(DialogTaskComponent, {
+      data: JSON.parse(JSON.stringify(task))
+    });
+
+    dialogRef.afterClosed().subscribe((dialogData) => {
+      if (!dialogData) return;
+      const { title, priority, deadline, open, description } = dialogData;
+      this._httpClient
+        .put(environment.endpoint + 'task/' + task.taskuuid, {
+          title,
+          priority,
+          deadline,
+          open,
+          description,
+        })
+        .subscribe((data) => {
+          forkJoin([
+            this._translateService.get('snackbar.task_added'),
+            this._translateService.get('snackbar.ok'),
+          ]).subscribe((text) => {
+            this._snackbar.open(text[0], text[1], { duration: 3000 });
+            this.refresh();
+          });
+        });
+    });
+  }
+
   date(isoDate: string) {
     if (isoDate == null) {
-      return this._translateService.get('deadline.none')
+      return this._translateService.get('deadline.none');
     }
     return of(new Date(isoDate).toLocaleDateString());
   }
@@ -211,14 +308,18 @@ export class EstateComponent implements OnInit {
           : 'dialog.confirm.mark_not_done_desc'
       ),
     ]).subscribe((text) => {
-      const dialogRef = this._dialog.open(DialogConfirmComponent, {data: {title: text[0], content: text[1]}});
-      dialogRef.afterClosed().subscribe(confirmed => {
+      const dialogRef = this._dialog.open(DialogConfirmComponent, {
+        data: { title: text[0], content: text[1] },
+      });
+      dialogRef.afterClosed().subscribe((confirmed) => {
         if (!confirmed) return;
 
-        this._httpClient.put(environment.endpoint + 'task/' + taskuuid, {
-          completed: !completed
-        }).subscribe(() => this.refresh())
-      })
+        this._httpClient
+          .put(environment.endpoint + 'task/' + taskuuid, {
+            completed: !completed,
+          })
+          .subscribe(() => this.refresh());
+      });
     });
   }
 }
