@@ -16,6 +16,12 @@
           {{ "nav.login" | translate }}
         </span>
       </a>
+      <a href="/workerlogin" *ngIf="!loggedIn" mat-list-item>
+        <mat-icon>engineering</mat-icon>
+        <span>
+          {{'nav.worker_login' | translate}}
+        </span>
+      </a>
       <a href="/register" *ngIf="!loggedIn" mat-list-item>
         <mat-icon mat-list-icon>person_add</mat-icon>
         <span>
@@ -23,11 +29,11 @@
         </span>
       </a>
 
-      <a href="/mypages" *ngIf="loggedIn" mat-list-item>
+      <a href="/mypages" *ngIf="loggedIn && admin" mat-list-item>
         <mat-icon> account_circle </mat-icon>
         <span>{{ "nav.mypages" | translate }}</span>
       </a>
-      <a href="/myestates" *ngIf="loggedIn" mat-list-item>
+      <a href="/myestates" *ngIf="loggedIn && admin" mat-list-item>
         <mat-icon>apartment</mat-icon>
         <span>{{ "nav.myestates" | translate }}</span></a>
     </mat-nav-list>

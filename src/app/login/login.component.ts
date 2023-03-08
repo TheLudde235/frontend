@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.loading = true;
-    this._authService.login(this.usernameValue, this.passwordValue).pipe(catchError((err, caught) => {
+    this._authService.adminLogin(this.usernameValue, this.passwordValue).pipe(catchError((err, caught) => {
       this.loading = false;
       return of(err) ?? caught
     })).subscribe((data) => {

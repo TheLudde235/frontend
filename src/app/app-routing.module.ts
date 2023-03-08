@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { WorkerloginComponent } from './workerlogin/workerlogin.component';
 import { EstateComponent } from './estate/estate.component';
 import { RegisterWorkerComponent } from './register-worker/register-worker.component';
+import { LoginworkerComponent } from './loginworker/loginworker.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'mypages', canActivate: [AdminGuard], component: MypagesComponent},
   { path: 'estate/:estateuuid', canActivate: [UserGuard], component: EstateComponent},
   { path: 'registerworker', component: RegisterWorkerComponent},
+  { path: 'loginworker', component: LoginworkerComponent},
   { path: '**', redirectTo: ''}
 ];
 

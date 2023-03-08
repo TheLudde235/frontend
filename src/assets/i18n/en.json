@@ -74,7 +74,7 @@
     }
   },
   "nav": {
-    "login": "Login",
+    "login": "Admin Login",
     "register": "Register",
     "settings": {
       "language": "Language",
@@ -82,14 +82,17 @@
     },
     "logout": "Logout",
     "mypages": "My Pages",
-    "myestates": "Estates"
+    "myestates": "Estates",
+    "worker_login": "Worker Login"
   },
   "server": {
     "error": {
       "title": "Server error",
       "content": "Our servers are down, please try logging in later",
       "wrong_username_or_password": "Wrong username or password",
-      "failed_login": "Login Failed"
+      "failed_login": "Login Failed",
+      "session_expired": "Session expired",
+      "login_again_content": "Please login again"
     }
   },
   "dialog": {
@@ -123,6 +126,9 @@
     },
     "title": {
       "are_you_sure": "Are you sure?"
+    },
+    "select": {
+      "delete_estate": "Choose estate to delete"
     }
   },
   "snackbar": {

@@ -10,6 +10,7 @@ import { DialogTaskComponent } from '../dialogs/dialog-task/dialog-task.componen
 import { DialogEstateComponent } from '../dialogs/dialog-estate/dialog-estate.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
+import { DialogSelectComponent } from '../dialogs/dialog-select/dialog-select.component';
 
 @Component({
   selector: 'app-mypages',
@@ -81,4 +82,15 @@ export class MypagesComponent {
     })
   }
 
+  openDeleteEstateDialog() {
+    this._httpClient.get(environment.endpoint + 'myestates').subscribe(estates => {
+      this._dialog.open(DialogSelectComponent, {
+        data: {
+          data: estates,
+          title: 'dialog.select.delete_estate',
+          color: 'warn'
+        }
+      }).afterClosed().subscribe(console.warn)
+    })
+  }
 }

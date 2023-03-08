@@ -21,7 +21,7 @@ export class AuthService {
 
   getToken = () => this.token;
 
-  public login(username: string, password: string): Observable<any> { 
+  public adminLogin(username: string, password: string): Observable<any> { 
       return this._httpClient.post<any>(environment.endpoint + 'login', {
         username,
         password

@@ -6,6 +6,7 @@ import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './auth.interceptor';
@@ -42,6 +43,8 @@ import { DialogUpdateEstateComponent } from './dialogs/dialog-update-estate/dial
 import { EstateComponent } from './estate/estate.component';
 import { DialogConfirmComponent } from './dialogs/dialog-confirm/dialog-confirm.component';
 import { RegisterWorkerComponent } from './register-worker/register-worker.component';
+import { LoginworkerComponent } from './loginworker/loginworker.component';
+import { DialogSelectComponent } from './dialogs/dialog-select/dialog-select.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -66,6 +69,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EstateComponent,
     DialogConfirmComponent,
     RegisterWorkerComponent,
+    LoginworkerComponent,
+    DialogSelectComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +79,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     MatNativeDateModule,
     MatIconModule,
+    MatAutocompleteModule,
     MatSnackBarModule,
     MatDatepickerModule,
     MatToolbarModule,

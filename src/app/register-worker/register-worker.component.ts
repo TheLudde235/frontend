@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Worker } from '../data-types';
@@ -16,7 +17,7 @@ export class RegisterWorkerComponent {
 
   emailUnique: boolean = false;
 
-  constructor(private _httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient, private _router: Router) {}
 
   esMatcher = new RegisterErrorStateMatcher()
 
@@ -48,6 +49,6 @@ export class RegisterWorkerComponent {
     return Object.keys({...this.emailFormControl.errors}).length < 1;
   }
   register() {
-    this._httpClient.post(environment.endpoint + 'worker', this.worker).subscribe(console.log)
+    this._httpClient.post(environment.endpoint + 'worker', this.worker).subscribe(() => this._router.navigateByUrl('/confirmation/worker'))
   }
 }

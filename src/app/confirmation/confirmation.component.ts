@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
+import { JWTService } from '../services/jwt.service';
+import { SetSession } from '../store/actions/session.actions';
+import { initialState } from '../store/reducers/session.reducer';
 
 @Component({
   selector: 'app-confirmation',
@@ -14,7 +18,9 @@ export class ConfirmationComponent implements OnInit {
   constructor(
     private _httpClient: HttpClient,
     private route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _store: Store,
+    private _jwt: JWTService
   ) {}
 
   ngOnInit(): void {
@@ -30,8 +36,11 @@ export class ConfirmationComponent implements OnInit {
       const url = new URL(
         environment.endpoint + `confirmMail/${this.code}?type=${this.type}`
       );
-      this._httpClient.get(url.toString()).subscribe((data) => {
-        if (data) this._router.navigateByUrl('/');
+      this._httpClient.get<any>(url.toString()).subscribe((data) => {
+        if (data) {
+          this._router.navigateByUrl('/');
+          this._store.dispatch(new SetSession({...initialState, ...this._jwt.getData(data.token), loggedIn: true, token: data.token}))
+        }
       });
     } else {
       this._httpClient

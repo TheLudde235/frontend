@@ -1,16 +1,16 @@
 <ng-template #loader>
-  <app-loading-spinner [loading]="true"></app-loading-spinner>
+  <app-loading-spinner [loading]="loading"></app-loading-spinner>
 </ng-template>
-<ng-container *ngIf="estates$ | async as estates; else loader">
-  <div class="estates">
-    <h1>{{ "page.mypages.estates" | translate }}</h1>
-    <button mat-raised-button color="accent" (click)="openEstateDialog()">
-      <mat-icon> add </mat-icon>
-      {{ "page.mypages.add_estate" | translate }}
-    </button>
-    <button mat-icon-button class="refresh-icon" (click)="refresh()">
-      <mat-icon>refresh</mat-icon>
-    </button>
+<ng-container>
+  <h1>{{ "page.mypages.estates" | translate }}</h1>
+  <button mat-raised-button color="accent" (click)="openEstateDialog()">
+    <mat-icon> add </mat-icon>
+    {{ "page.mypages.add_estate" | translate }}
+  </button>
+  <button mat-icon-button class="refresh-icon" (click)="refresh()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+  <div class="estates" *ngIf="estates$ | async as estates; else loader">
     <div class="estate" *ngFor="let estate of estates">
       <a href="/estate/{{ estate.estateuuid }}">
         <h2>{{ estate.city }}, {{ estate.street }}</h2>

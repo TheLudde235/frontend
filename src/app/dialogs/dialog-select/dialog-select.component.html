@@ -1,0 +1,22 @@
+<form>
+  <mat-form-field class="textbox" appearance="fill">
+    <mat-label>{{data.title | translate}}</mat-label>
+    <input type="text" matInput [formControl]="autoCompleteControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">
+        {{option.name ?? option.city + ', ' + option.street + ' ' + option.streetnumber}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <div class="actions">
+    <button mat-raised-button (click)="cancel()">{{'dialog.confirm.cancel' | translate }}</button>
+  <button
+    mat-raised-button
+    [mat-dialog-close]="{estateuuid}"
+    cdkFocusInitial
+    [color]="data.color"
+  >
+    Ok
+  </button>
+  </div>
+</form>
