@@ -5,9 +5,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import {Observable, catchError, of, forkJoin, map} from 'rxjs';
+import { Observable, catchError, of, forkJoin, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Estate } from '../data-types';
+import { DialogConfirmComponent } from '../dialogs/dialog-confirm/dialog-confirm.component';
 import { DialogEstateComponent } from '../dialogs/dialog-estate/dialog-estate.component';
 import { DialogOkComponent } from '../dialogs/dialog-ok/dialog-ok.component';
 import { DialogTaskComponent } from '../dialogs/dialog-task/dialog-task.component';
@@ -24,50 +25,50 @@ export class MyestatesComponent {
   admin: boolean = false;
   loading: boolean = true;
 
-  constructor(private store: Store<{session: Session}>, private _httpClient: HttpClient, private _dialog: MatDialog, private _translateService: TranslateService, private _snackbar: MatSnackBar, private _router: Router) {
-    store.select('session').subscribe(session => {this.admin = session.admin});
+  constructor(private store: Store<{ session: Session }>, private _httpClient: HttpClient, private _dialog: MatDialog, private _translateService: TranslateService, private _snackbar: MatSnackBar, private _router: Router) {
+    store.select('session').subscribe(session => { this.admin = session.admin });
     this.estates$ = _httpClient.get<Estate[]>(environment.endpoint + 'myestates')
-    .pipe(catchError((err, caught) => {
-      console.warn(err)
-      const jwtSet = new Set(['jwt expired', 'invalid token', 'jwt malformed', 'jwt signature is required', 'invalid signature']);
-      if (err.status === 0) {
-        forkJoin([
-          this._translateService.get('server.error.title'),
-          this._translateService.get('server.error.content')
-        ]).subscribe(text => {
-          this._dialog.open(DialogOkComponent, {
-            data: {
-              title: text[0],
-              content: text[1]
-            }
-          })
-        })
-      } else if(jwtSet.has(err.error.msg)) {
-        forkJoin([
-          this._translateService.get('server.error.session_expired'),
-          this._translateService.get('server.error.login_again_content')
-        ]).subscribe(text => {
-
-          this._dialog.open(DialogOkComponent, {
-            data: {
-              title: text[0],
-              content: text[1]
-            }
-          }).afterClosed().subscribe(() => {
-            this.store.select('session').subscribe(session => {
-              this.store.dispatch(new ResetSession());
-              if (session.admin) {
-                this._router.navigateByUrl('/login')
-              } else {
-                this._router.navigateByUrl('/loginworker')
+      .pipe(catchError((err, caught) => {
+        console.warn(err)
+        const jwtSet = new Set(['jwt expired', 'invalid token', 'jwt malformed', 'jwt signature is required', 'invalid signature']);
+        if (err.status === 0) {
+          forkJoin([
+            this._translateService.get('server.error.title'),
+            this._translateService.get('server.error.content')
+          ]).subscribe(text => {
+            this._dialog.open(DialogOkComponent, {
+              data: {
+                title: text[0],
+                content: text[1]
               }
             })
           })
-        })
+        } else if (jwtSet.has(err.error.msg)) {
+          forkJoin([
+            this._translateService.get('server.error.session_expired'),
+            this._translateService.get('server.error.login_again_content')
+          ]).subscribe(text => {
+
+            this._dialog.open(DialogOkComponent, {
+              data: {
+                title: text[0],
+                content: text[1]
+              }
+            }).afterClosed().subscribe(() => {
+              this.store.select('session').subscribe(session => {
+                this.store.dispatch(new ResetSession());
+                if (session.admin) {
+                  this._router.navigateByUrl('/login')
+                } else {
+                  this._router.navigateByUrl('/loginworker')
+                }
+              })
+            })
+          })
         }
-      this.loading = false;
-      return []
-    }));
+        this.loading = false;
+        return []
+      }));
   }
 
 
@@ -89,8 +90,8 @@ export class MyestatesComponent {
 
     dialogRef.afterClosed().subscribe(dialogData => {
       if (!dialogData) return;
-      const {title, priority, deadline, open, description} = dialogData
-      this._httpClient.post(environment.endpoint + 'task/' + estateuuid, {title, priority, deadline, open, description}).subscribe(console.log);
+      const { title, priority, deadline, open, description } = dialogData
+      this._httpClient.post(environment.endpoint + 'task/' + estateuuid, { title, priority, deadline, open, description }).subscribe(console.log);
     });
   }
 
@@ -114,15 +115,29 @@ export class MyestatesComponent {
   }
 
   delete(estateuuid: string) {
-    this._httpClient.delete(environment.endpoint + 'estate/' + estateuuid).subscribe(data => {
-      forkJoin([
-        this._translateService.get('snackbar.estate_deleted'),
-        this._translateService.get('snackbar.ok')
-      ]).subscribe(text => {
-        this._snackbar.open(text[0], text[1]);
-      })
-      this.refresh();
-    })
+    forkJoin([
+      this._translateService.get('dialog.title.are_you_sure'),
+      this._translateService.get('dialog.confirm.delete_estate'),
+    ]).subscribe((text) => {
+      const dialogRef = this._dialog.open(DialogConfirmComponent, {
+        data: { title: text[0], content: text[1], color: 'warn' },
+      });
+      dialogRef.afterClosed().subscribe((confirmed) => {
+        if (!confirmed) return;
+
+        this._httpClient
+          .delete(environment.endpoint + 'estate/' + estateuuid)
+          .subscribe((data) => {
+            forkJoin([
+              this._translateService.get('snackbar.estate_deleted'),
+              this._translateService.get('snackbar.ok'),
+            ]).subscribe((text) => {
+              this._snackbar.open(text[0], text[1], { duration: 3000 });
+              this.refresh();
+            });
+          });
+      });
+    });
   }
 
   openEstateDialog() {
@@ -136,17 +151,17 @@ export class MyestatesComponent {
     });
     dialogRef.afterClosed().subscribe(res => {
       if (!res) return;
-      const {city, street, streetnumber,description} = res;
+      const { city, street, streetnumber, description } = res;
       this._httpClient.post(environment.endpoint + 'registerestate', res).subscribe()
-        forkJoin([
-          this._translateService.get('snackbar.estate_added'),
-          this._translateService.get('snackbar.ok')
-        ]).subscribe(text => {
-          this._snackbar.open(text[0], text[1], {
-            duration: 5000
-          });
-          this.refresh();
-        })
+      forkJoin([
+        this._translateService.get('snackbar.estate_added'),
+        this._translateService.get('snackbar.ok')
+      ]).subscribe(text => {
+        this._snackbar.open(text[0], text[1], {
+          duration: 5000
+        });
+        this.refresh();
+      })
     });
   }
 }

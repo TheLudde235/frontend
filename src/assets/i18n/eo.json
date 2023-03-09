@@ -92,7 +92,8 @@
       "sort_deadline": "Limdato",
       "sort_priority": "Prioritato",
       "task_deleted": "Tasko estis forigita",
-      "transfer_task": "Translokigo"
+      "transfer_task": "Translokigo",
+      "update_prelim": "Ĝisdatigi Kostojn"
     },
     "login": {
       "admin": "Admin Ensaluto",
@@ -187,7 +188,8 @@
     "removed_self": "Forigis vin de tasko",
     "task_deleted": "Tasko forigita",
     "taskmaster_changed": "Laboristo aldonita kiel taskadmin",
-    "worker_invited": "Laboristo invitita"
+    "worker_invited": "Laboristo invitita",
+    "task_updated": "Tasko ĝisdatigita"
   },
   "deadline": {
     "none": "Neniu"

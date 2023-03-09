@@ -92,7 +92,8 @@
       "sort_deadline": "Deadline",
       "sort_priority": "Prioritet",
       "task_deleted": "Uppgiften har tagits bort",
-      "transfer_task": "Överföra"
+      "transfer_task": "Överföra",
+      "update_prelim": "Uppdatera kostnader"
     },
     "login": {
       "admin": "Admin inloggning",
@@ -187,7 +188,8 @@
     "removed_self": "Tog bort dig själv från uppgiften",
     "task_deleted": "Uppgiften raderad",
     "taskmaster_changed": "Arbetare har lagts till som uppgiftsadministratör",
-    "worker_invited": "Arbetare inbjuden"
+    "worker_invited": "Arbetare inbjuden",
+    "task_updated": "Uppgiften uppdaterad"
   },
   "deadline": {
     "none": "Ingen"
