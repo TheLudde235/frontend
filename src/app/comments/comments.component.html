@@ -1,0 +1,39 @@
+
+<div class="task-info" *ngIf="header ">
+    {{'page.comments.done' | translate}}: {{header.text.split('>!<')[1]}}
+    <br>
+    {{'page.comments.cost' | translate}}: {{header.text.split('>!<')[2]}}
+    <br>
+    {{'page.comments.header_comment' | translate}}: {{header.text.split('>!<')[3]}}
+    <br>
+    {{'page.comments.og_taskmaster' | translate}}: {{header.user.username ?? header.user.firstname + ' ' + header.user.lastname}}
+    <hr>
+</div>
+
+<button mat-icon-button class="refresh-icon" (click)="refresh()">
+  <mat-icon>refresh</mat-icon>
+</button>
+<div class="comments">
+    <div class="comment {{comment.admin ? 'admin' : ''}}" *ngFor="let comment of comments">
+        <div class="content">
+            <h3>{{comment.text}}</h3>   
+            <p>{{comment.user.username ?? comment.user.firstname + ' ' + header.user.lastname}}</p>
+        </div>
+        <button mat-icon-button (click)="delete(comment.commentuuid)" *ngIf="useruuid == comment.useruuid">
+            <mat-icon>
+                delete
+            </mat-icon>
+        </button>
+    </div>
+</div>
+
+
+<div class="chatbox">
+  <mat-form-field appearance="outline">
+    <mat-label>{{'pages.comments.comment' | translate}}</mat-label>
+    <input matInput type="text" class="example-right-align" [(ngModel)]="commentValue" (keydown)="submitFunction($event)">
+  </mat-form-field>
+    <button (click)="sendComment()" class="send-button" mat-icon-button>
+        <mat-icon>send</mat-icon>
+    </button>
+</div>

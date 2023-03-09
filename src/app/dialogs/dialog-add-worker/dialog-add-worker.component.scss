@@ -1,0 +1,14 @@
+.dialog {
+    height: 500px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .select-box {
+        margin: 20px auto;
+    }
+    .actions {
+        margin: auto auto 50px;
+    }
+}

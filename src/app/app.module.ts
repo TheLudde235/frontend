@@ -39,12 +39,14 @@ import { DialogTaskComponent } from './dialogs/dialog-task/dialog-task.component
 import {MatSelectModule} from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
 import { DialogEstateComponent } from './dialogs/dialog-estate/dialog-estate.component';
-import { DialogUpdateEstateComponent } from './dialogs/dialog-update-estate/dialog-update-estate.component';
 import { EstateComponent } from './estate/estate.component';
 import { DialogConfirmComponent } from './dialogs/dialog-confirm/dialog-confirm.component';
 import { RegisterWorkerComponent } from './register-worker/register-worker.component';
-import { LoginworkerComponent } from './loginworker/loginworker.component';
 import { DialogSelectComponent } from './dialogs/dialog-select/dialog-select.component';
+import { DialogAddWorkerComponent } from './dialogs/dialog-add-worker/dialog-add-worker.component';
+import { InvitesComponent } from './invites/invites.component';
+import { DialogTakeTaskComponent } from './dialogs/dialog-take-task/dialog-take-task.component';
+import { CommentsComponent } from './comments/comments.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -65,12 +67,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     MyestatesComponent,
     DialogTaskComponent,
     DialogEstateComponent,
-    DialogUpdateEstateComponent,
     EstateComponent,
     DialogConfirmComponent,
     RegisterWorkerComponent,
-    LoginworkerComponent,
     DialogSelectComponent,
+    DialogAddWorkerComponent,
+    InvitesComponent,
+    DialogTakeTaskComponent,
+    CommentsComponent,
   ],
   imports: [
     BrowserModule,

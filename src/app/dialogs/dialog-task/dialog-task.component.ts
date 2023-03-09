@@ -8,7 +8,7 @@ import { Estate } from 'src/app/data-types';
 import { Language, Session } from 'src/app/store/models/runtime';
 import { environment } from 'src/environments/environment';
 
-export interface DialogData {
+interface DialogData {
   title: string;
   description: string;
   estateuuid: string;

@@ -1,20 +1,33 @@
-.estate-options .mat-mdc-icon-button:not(.refresh-icon) {
-  position: absolute;
-  right: 20px;
-  scale: 1.5;
-  top: 0;
+.actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 20px;
+  .setting-icon {
+    position: absolute;
+    right: 0;
+    scale: 1.5;
+  }
 }
-.refresh-icon {
-  position: absolute;
-  scale: 1.5;
-  right: 20px;
+.tasks-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  gap: 5px;
+  .refresh-icon {
+    position: absolute;
+    right: 0;
+    scale: 1.5;
+  }
 }
 .task {
   background-color: #444;
   margin: 20px;
   border-radius: 5px;
   padding: 20px;
-    position: relative;
+  position: relative;
 
   .task-settings {
     position: absolute;
@@ -32,7 +45,7 @@
     grid-template-areas:
       "desc  priority"
       "deadline  priority";
-    grid-template-columns: 210px auto;
+    grid-template-columns: auto 75px;
     grid-template-rows: auto 40px;
   }
   .task-info-container.long {
@@ -122,4 +135,19 @@
   justify-content: space-between;
   max-width: 250px;
   display: flex;
+}
+
+.no-task {
+  margin-top: 50px;
+}
+
+h1 {
+  margin-top: 20px;
+  text-align: center;
+}
+
+hr {
+  height: 5px;
+  border: none;
+  background-color: #222;
 }

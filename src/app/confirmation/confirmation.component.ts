@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../services/auth.service';
 import { JWTService } from '../services/jwt.service';
 import { SetSession } from '../store/actions/session.actions';
 import { initialState } from '../store/reducers/session.reducer';
@@ -20,6 +21,7 @@ export class ConfirmationComponent implements OnInit {
     private route: ActivatedRoute,
     private _router: Router,
     private _store: Store,
+    private _authService: AuthService,
     private _jwt: JWTService
   ) {}
 
@@ -44,9 +46,11 @@ export class ConfirmationComponent implements OnInit {
       });
     } else {
       this._httpClient
-        .get(environment.endpoint + 'confirmMail/' + this.code)
+        .get<any>(environment.endpoint + 'confirmMail/' + this.code)
         .subscribe((data) => {
           if (data) this._router.navigateByUrl('/');
+          localStorage.setItem('tempToken', JSON.stringify(data));
+          this._authService.workerLogin(data.token)
         });
     }
   }

@@ -3,7 +3,7 @@
 </ng-template>
 <ng-container>
   <h1>{{ "page.mypages.estates" | translate }}</h1>
-  <button mat-raised-button color="accent" (click)="openEstateDialog()">
+  <button *ngIf="admin" mat-raised-button color="accent" (click)="openEstateDialog()">
     <mat-icon> add </mat-icon>
     {{ "page.mypages.add_estate" | translate }}
   </button>
@@ -21,15 +21,15 @@
         <mat-icon>settings</mat-icon>
       </button>
       <mat-menu #menu>
-        <button mat-menu-item (click)="addTask(estate.estateuuid)">
+        <button mat-menu-item (click)="addTask(estate.estateuuid)" *ngIf="admin">
           <mat-icon>add</mat-icon>
           {{ "page.mypages.add_task" | translate }}
         </button>
-        <button mat-menu-item (click)="update(estate)">
+        <button mat-menu-item (click)="update(estate)" *ngIf="admin">
           <mat-icon>construction</mat-icon>
           {{ "page.estate.update" | translate }}
         </button>
-        <button mat-menu-item (click)="delete(estate.estateuuid)">
+        <button mat-menu-item (click)="delete(estate.estateuuid)" *ngIf="admin">
           <mat-icon>delete</mat-icon>
           {{ "page.estate.delete" | translate }}
         </button>

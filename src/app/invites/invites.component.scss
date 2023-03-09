@@ -1,0 +1,17 @@
+.code-button-container {
+    width: 100%;
+    display: flex;
+    .code-button {
+        margin: 20px auto;
+    }
+}
+.invite {
+    border-radius: 5px;
+    background-color: #444;
+    margin: 20px;
+    padding: 10px;
+    .actions {
+        display: flex;
+        gap: 20px;
+    }
+}

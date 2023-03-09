@@ -60,7 +60,10 @@
       "comments": "Comments",
       "edit": "Edit",
       "done": "Done",
-      "not_done": "Not done"
+      "not_done": "Not done",
+      "no_task": "No Tasks",
+      "transfer_task": "Transfer",
+      "remove_self": "Forfeit"
     },
     "myestates": {
       "more_actions": "More actions"
@@ -71,6 +74,23 @@
       "lastname": "Lastname",
       "submit": "Submit",
       "phone": "Phonenumber"
+    },
+    "confirmation": {
+      "check_inbox": "Check your inbox"
+    },
+    "invites": {
+      "accept_with_code": "Accept Invite with code",
+      "preview": "Preview",
+      "accept": "Accept"
+    },
+    "comments": {
+      "done": "Estimated completion",
+      "cost": "Cost",
+      "header_comment": "Comment",
+      "og_taskmaster": "Original taskmaster"
+    },
+    "comment": {
+      "send": "Send"
     }
   },
   "nav": {
@@ -83,7 +103,8 @@
     "logout": "Logout",
     "mypages": "My Pages",
     "myestates": "Estates",
-    "worker_login": "Worker Login"
+    "worker_login": "Worker Login",
+    "accept_invite": "Accept Invite"
   },
   "server": {
     "error": {
@@ -92,7 +113,10 @@
       "wrong_username_or_password": "Wrong username or password",
       "failed_login": "Login Failed",
       "session_expired": "Session expired",
-      "login_again_content": "Please login again"
+      "login_again_content": "Please login again",
+      "duplicate_confirmationkey_content": "You already have a pending confirmation",
+      "duplicate_confirmationkey_title": "Check your inbox!",
+      "already_invited": "Worker is already invited"
     }
   },
   "dialog": {
@@ -129,6 +153,18 @@
     },
     "select": {
       "delete_estate": "Choose estate to delete"
+    },
+    "error": {
+      "wrong_email": "Wrong email",
+      "no_email_found": "We couldn't find {{email}} in our database"
+    },
+    "add": "Add",
+    "worker": {
+      "transfer": "Transfer",
+      "worker": "Worker"
+    },
+    "take_task": {
+      "cost": "Cost"
     }
   },
   "snackbar": {
@@ -137,7 +173,11 @@
     "estate_added": "Estate added succesfully",
     "estate_deleted": "Estate deleted",
     "estate_updated": "Estate updated",
-    "task_deleted": "Task deleted"
+    "task_deleted": "Task deleted",
+    "worker_invited": "Worker invited",
+    "taskmaster_changed": "Worker added as taskadmin",
+    "removed_self": "Removed yourself from task",
+    "added_self": "Added yourself to task"
   },
   "priority": {
     "none": "None",
@@ -152,5 +192,13 @@
   },
   "deadline": {
     "none": "None"
+  },
+  "email": {
+    "resend": "Resend"
+  },
+  "pages": {
+    "comments": {
+      "comment": "Comment"
+    }
   }
 }

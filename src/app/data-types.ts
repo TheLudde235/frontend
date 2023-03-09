@@ -12,7 +12,6 @@ export interface Token {
     email: string;
     username: string;
     admin: boolean;
-    estates: Estate[];
     iat: number;
     exp: number;
 }
@@ -35,6 +34,7 @@ export interface Comment {
     text: string;
     admin: boolean;
     useruuid: string;
+    respondtouuid?: string;
 }
 
 export interface Worker {

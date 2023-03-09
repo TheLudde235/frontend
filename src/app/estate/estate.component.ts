@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { forkJoin, map, Observable, of } from 'rxjs';
+import { forkJoin, map, Observable, of, catchError } from 'rxjs';
 import { PriorityColors } from '../colors';
 import { environment } from 'src/environments/environment';
 import { Estate, Priority, Task } from '../data-types';
@@ -13,6 +13,8 @@ import { DialogConfirmComponent } from '../dialogs/dialog-confirm/dialog-confirm
 import { DialogEstateComponent } from '../dialogs/dialog-estate/dialog-estate.component';
 import { DialogTaskComponent } from '../dialogs/dialog-task/dialog-task.component';
 import { Session } from '../store/models/runtime';
+import { DialogAddWorkerComponent } from '../dialogs/dialog-add-worker/dialog-add-worker.component';
+import { DialogTakeTaskComponent } from '../dialogs/dialog-take-task/dialog-take-task.component';
 
 interface EstateData {
   estate: Estate;
@@ -29,7 +31,8 @@ export class EstateComponent implements OnInit {
   loading: boolean = false;
   data$: Observable<EstateData> | undefined;
   prioritySort: boolean = true;
-  isAdmin$: Observable<boolean>;
+  isAdmin: boolean = false;
+  useruuid: string = '';
   reversed = false;
 
   constructor(
@@ -41,9 +44,11 @@ export class EstateComponent implements OnInit {
     private _router: Router,
     private store: Store<{ session: Session }>
   ) {
-    this.isAdmin$ = store
-      .select('session')
-      .pipe(map((session) => session.admin));
+    store.select('session').subscribe((session) => {
+      console.log(session);
+      this.isAdmin = session.admin;
+      this.useruuid = session.uuid;
+    });
   }
 
   PriorityEnum = {
@@ -232,31 +237,63 @@ export class EstateComponent implements OnInit {
   deleteTask(taskuuid: string) {
     forkJoin([
       this._translateService.get('dialog.title.are_you_sure'),
-      this._translateService.get('dialog.confirm.delete_task')
-    ]).subscribe(text => {
+      this._translateService.get('dialog.confirm.delete_task'),
+    ]).subscribe((text) => {
       const dialogRef = this._dialog.open(DialogConfirmComponent, {
-        data: {title: text[0], content: text[1], color: 'warn'}
+        data: { title: text[0], content: text[1], color: 'warn' },
       });
-      dialogRef.afterClosed().subscribe(confirmed => {
+      dialogRef.afterClosed().subscribe((confirmed) => {
         if (!confirmed) return;
 
-        this._httpClient.delete(environment.endpoint + 'task/' + taskuuid)
-        .subscribe(data => {
-          forkJoin([
-            this._translateService.get('snackbar.task_deleted'),
-            this._translateService.get('snackbar.ok')
-          ]).subscribe(text => {
-            this._snackbar.open(text[0], text[1], {duration: 3000});
-            this.refresh();
-          })
-        })
-      })
-    })
+        this._httpClient
+          .delete(environment.endpoint + 'task/' + taskuuid)
+          .subscribe((data) => {
+            forkJoin([
+              this._translateService.get('snackbar.task_deleted'),
+              this._translateService.get('snackbar.ok'),
+            ]).subscribe((text) => {
+              this._snackbar.open(text[0], text[1], { duration: 3000 });
+              this.refresh();
+            });
+          });
+      });
+    });
+  }
+
+  transferTask(task: Task) {
+    this.route.params.subscribe((params) => {
+      this._httpClient
+        .get<string[]>(environment.endpoint + 'workers/' + params['estateuuid'])
+        .subscribe((workers) => {
+          this._dialog
+            .open(DialogAddWorkerComponent, {
+              data: {
+                workers,
+                action: 'dialog.worker.transfer',
+              },
+            })
+            .afterClosed()
+            .subscribe((worker) => {
+              this._httpClient
+                .put(environment.endpoint + 'task/' + task.taskuuid, {
+                  taskmaster: worker,
+                })
+                .subscribe(() => {
+                  forkJoin([
+                    this._translateService.get('snackbar.taskmaster_changed'),
+                    this._translateService.get('snackbar.ok'),
+                  ]).subscribe((text) => {
+                    this._snackbar.open(text[0], text[1]);
+                  });
+                });
+            });
+        });
+    });
   }
 
   updateTask(task: Task) {
     const dialogRef = this._dialog.open(DialogTaskComponent, {
-      data: JSON.parse(JSON.stringify(task))
+      data: JSON.parse(JSON.stringify(task)),
     });
 
     dialogRef.afterClosed().subscribe((dialogData) => {
@@ -321,5 +358,97 @@ export class EstateComponent implements OnInit {
           .subscribe(() => this.refresh());
       });
     });
+  }
+
+  openWorkerDialog() {
+    this._httpClient
+      .get<Worker[]>(environment.endpoint + 'workers')
+      .subscribe((workers) => {
+        console.warn(workers);
+        this.data$?.subscribe((d) => {
+          this._dialog
+            .open(DialogAddWorkerComponent, {
+              data: { workers, action: 'dialog.add' },
+            })
+            .afterClosed()
+            .subscribe((worker) => {
+              this._httpClient
+                .post(
+                  environment.endpoint + 'addworker/' + d.estate.estateuuid,
+                  { worker }
+                )
+                .pipe(
+                  catchError((err, caugth) => {
+                    forkJoin([
+                      this._translateService.get(err.error.msg),
+                      this._translateService.get('snackbar.ok'),
+                    ]).subscribe((text) => {
+                      this._snackbar.open(text[0], text[1], { duration: 3000 });
+                    });
+                    return of(err ?? caugth);
+                  })
+                )
+                .subscribe((data) => {
+                  if (data && !data.ok) return;
+                  forkJoin([
+                    this._translateService.get('snackbar.worker_invited'),
+                    this._translateService.get('snackbar.ok'),
+                  ]).subscribe((text) => {
+                    this._snackbar.open(text[0], text[1], { duration: 3000 });
+                  });
+                });
+            });
+        });
+      });
+  }
+
+  takeTask(taskuuid: string) {
+    this._dialog
+      .open(DialogTakeTaskComponent, {
+        data: {
+          time: '',
+          cost: 0,
+          comment: '',
+        },
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        if (!data) return;
+        this._httpClient
+          .post(environment.endpoint + 'taketask/' + taskuuid, {
+            taskmaster: this.useruuid,
+          })
+          .subscribe((res) => {
+            this._httpClient
+              .post(environment.endpoint + 'comment/' + taskuuid, {
+                text: `>!<${data.time.toISOString()}>!<${data.cost}>!<${data.comment}`,
+              })
+              .subscribe((r) => {
+                forkJoin([
+                  this._translateService.get('snackbar.added_self'),
+                  this._translateService.get('snackbar.ok'),
+                ]).subscribe((text) => {
+                  this._snackbar.open(text[0], text[1], { duration: 3000 });
+                  this.refresh();
+                });
+              });
+          });
+      });
+  }
+
+  removeSelf(taskuuid: string) {
+    this._httpClient
+      .put(environment.endpoint + 'task/' + taskuuid, {
+        taskmaster: null,
+      })
+      .subscribe((res) => {
+        forkJoin([
+          this._translateService.get('snackbar.removed_self'),
+          this._translateService.get('snackbar.ok'),
+        ]).subscribe((text) => {
+          this._snackbar.open(text[0], text[1], { duration: 3000 });
+          this.refresh();
+        });
+      });
   }
 }

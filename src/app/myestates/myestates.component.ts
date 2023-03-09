@@ -21,9 +21,11 @@ import { Session } from '../store/models/runtime';
 })
 export class MyestatesComponent {
   estates$: Observable<Estate[]>;
+  admin: boolean = false;
   loading: boolean = true;
 
   constructor(private store: Store<{session: Session}>, private _httpClient: HttpClient, private _dialog: MatDialog, private _translateService: TranslateService, private _snackbar: MatSnackBar, private _router: Router) {
+    store.select('session').subscribe(session => {this.admin = session.admin});
     this.estates$ = _httpClient.get<Estate[]>(environment.endpoint + 'myestates')
     .pipe(catchError((err, caught) => {
       console.warn(err)

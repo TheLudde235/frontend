@@ -36,7 +36,6 @@ export class MypagesComponent {
     });
     dialogRef.afterClosed().subscribe(res => {
       if (!res) return;
-      const {city, street, streetnumber,description} = res;
       this._httpClient.post(environment.endpoint + 'registerestate', res).subscribe()
         forkJoin([
           this._translateService.get('snackbar.estate_added'),

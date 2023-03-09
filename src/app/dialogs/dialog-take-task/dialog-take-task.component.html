@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>{{ "dialog.task.add_task" | translate }}</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "dialog.task.choose_deadline" | translate }}</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="data.time" required/>
+    <mat-hint>({{ "dialog.task.leave_empty" | translate }})</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{'dialog.take_task.cost' | translate}}</mat-label>
+    <input type="number" matInput [(ngModel)]="data.cost" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ "dialog.task.description" | translate }}</mat-label>
+    <input matInput [(ngModel)]="data.comment">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">
+    {{ "dialog.task.cancel" | translate }}
+  </button>
+  <button
+    mat-raised-button
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+    disabled="{{ !data.time || !data.cost }}"
+    color="primary"
+  >
+    Ok
+  </button>
+</div>

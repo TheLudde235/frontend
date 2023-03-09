@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  usernameValue: string = 'Terry';
-  passwordValue: string = 'Davis';
+  usernameValue: string = '';
+  passwordValue: string = '';
 
   usernameFormControl = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]*')]);
   passwordFormControl = new FormControl('', [Validators.required]);

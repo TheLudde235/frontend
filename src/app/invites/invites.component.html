@@ -1,0 +1,35 @@
+<div class="code-button-container">
+  <a href="/confirmation/acceptinvite" mat-raised-button color="primary" class="code-button">
+    <mat-icon>mark_email_read</mat-icon>
+    <span>
+      {{ "page.invites.accept_with_code" | translate }}
+    </span>
+  </a>
+</div>
+
+<div class="invites">
+  <div class="invite" *ngFor="let invite of invites$ | async">
+    <h2>
+      {{ invite.estate.city }}, {{ invite.estate.street }}
+      {{ invite.estate.streetnumber }}
+    </h2>
+    <p>{{ invite.estate.description }}</p>
+    <div class="actions">
+      <a
+        href="/estate/{{ invite.estate.estateuuid }}"
+        mat-raised-button
+        color="primary"
+        >
+        <mat-icon>visibility</mat-icon>
+        {{ "page.invites.preview" | translate }}</a>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="accept(invite.confirmationcode, invite.estate.estateuuid)"
+      >
+      <mat-icon>done</mat-icon>
+        {{ "page.invites.accept" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

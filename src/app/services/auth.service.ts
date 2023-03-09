@@ -7,6 +7,7 @@ import { Session } from '../store/models/runtime';
 import { catchError, of, Observable, map } from 'rxjs';
 import { JWTService } from './jwt.service';
 import { initialState } from '../store/reducers/session.reducer';
+import { Token } from '../data-types';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,10 @@ export class AuthService {
           return this.store.dispatch(new SetSession({...initialState, ...this._jwtService.getData(data.token), loggedIn: true, token: data.token}));
         })
       )
+  }
+
+  public workerLogin(token: string): void {
+    this.store.dispatch(new SetSession({...initialState, ...this._jwtService.getData(token), loggedIn: true, token: token}))
   }
 
   public logout() {

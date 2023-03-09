@@ -1,0 +1,21 @@
+<form class="dialog">
+  <mat-form-field appearance="fill" class="select-box">
+    <mat-label>{{ 'dialog.worker.worker' | translate }}</mat-label>
+    <mat-select [(ngModel)]="selected" name="worker">
+      <mat-option *ngFor="let worker of data.workers" [value]="worker.workeruuid">
+        {{ worker.firstname }} {{ worker.lastname }}
+        <br />
+        {{ worker.email }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="actions">
+    <button mat-raised-button (click)="cancel()" color="primary">
+      {{ "dialog.confirm.cancel" | translate }}
+    </button>
+    <button mat-raised-button [mat-dialog-close]="selected" color="primary" [disabled]="!selected">
+      {{ data.action | translate }}
+    </button>
+  </div>
+</form>
