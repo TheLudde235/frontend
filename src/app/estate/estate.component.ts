@@ -436,6 +436,40 @@ export class EstateComponent implements OnInit {
       });
   }
 
+  updatePrelimTask(taskuuid: string) {
+this._dialog
+      .open(DialogTakeTaskComponent, {
+        data: {
+          time: '',
+          cost: 0,
+          comment: '',
+        },
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        if (!data) return;
+        this._httpClient
+          .post(environment.endpoint + 'taketask/' + taskuuid, {
+            taskmaster: this.useruuid,
+          })
+          .subscribe((res) => {
+            this._httpClient
+              .post(environment.endpoint + 'comment/' + taskuuid, {
+                text: `>!<${data.time.toISOString()}>!<${data.cost}>!<${data.comment}`,
+              })
+              .subscribe((r) => {
+                forkJoin([
+                  this._translateService.get('snackbar.task_updated'),
+                  this._translateService.get('snackbar.ok'),
+                ]).subscribe((text) => {
+                  this._snackbar.open(text[0], text[1], { duration: 3000 });
+                  this.refresh();
+                });
+              });
+          });
+      });
+  }
+
   removeSelf(taskuuid: string) {
     this._httpClient
       .put(environment.endpoint + 'task/' + taskuuid, {

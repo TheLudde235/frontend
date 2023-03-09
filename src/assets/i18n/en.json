@@ -63,7 +63,8 @@
       "not_done": "Not done",
       "no_task": "No Tasks",
       "transfer_task": "Transfer",
-      "remove_self": "Forfeit"
+      "remove_self": "Forfeit",
+      "update_prelim": "Update Costs"
     },
     "myestates": {
       "more_actions": "More actions"
@@ -87,7 +88,7 @@
       "done": "Estimated completion",
       "cost": "Cost",
       "header_comment": "Comment",
-      "og_taskmaster": "Original taskmaster"
+      "og_taskmaster": "Taskmaster"
     },
     "comment": {
       "send": "Send"
@@ -181,7 +182,8 @@
     "worker_invited": "Worker invited",
     "taskmaster_changed": "Worker added as taskadmin",
     "removed_self": "Removed yourself from task",
-    "added_self": "Added yourself to task"
+    "added_self": "Added yourself to task",
+    "task_updated": "Task updated"
   },
   "priority": {
     "none": "None",

@@ -170,6 +170,11 @@
         <mat-icon>cancel</mat-icon>
           {{ "page.estate.remove_self" | translate }}
         </button>
+        <button
+        *ngIf="!isAdmin" mat-menu-item (click)="updatePrelimTask(task.taskuuid)">
+        <mat-icon>update</mat-icon>
+        {{'page.estate.update_prelim' | translate}}
+        </button>
       </mat-menu>
       <div class="task-actions">
         <a href="/comments/{{task.taskuuid}}" mat-raised-button color="primary">
@@ -178,6 +183,7 @@
         <button
           mat-raised-button
           color="{{ task.completed ? 'accent' : 'warn' }}"
+          *ngIf="isAdmin || task.taskmaster == useruuid"
           (click)="toggleDone(task)"
         >
           {{

@@ -34,9 +34,16 @@ export class CommentsComponent {
         .get<{ comments: Comment[] }>(
           environment.endpoint + 'comments/' + params['taskuuid']
         )
-        .subscribe((c) => {
-          this.header = c.comments.shift();
-          this.comments = c.comments;
+        .subscribe((res) => {
+          const comments: Comment[] = [];
+          res.comments.forEach(c => {
+            if (c.text.split('>!<').length == 4) {
+              this.header = c;
+            } else {
+              comments.push(c);
+            }
+          })
+          this.comments = comments;
         });
     });
   }
