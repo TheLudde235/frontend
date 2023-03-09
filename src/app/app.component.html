@@ -16,25 +16,30 @@
           {{ "nav.login" | translate }}
         </span>
       </a>
-      <a href="/workerlogin" *ngIf="!loggedIn" mat-list-item>
-        <mat-icon>engineering</mat-icon>
-        <span>
-          {{'nav.worker_login' | translate}}
-        </span>
-      </a>
       <a href="/register" *ngIf="!loggedIn" mat-list-item>
         <mat-icon mat-list-icon>person_add</mat-icon>
         <span>
           {{ "nav.register" | translate }}
         </span>
       </a>
+      <a href="/workerlogin" *ngIf="!loggedIn" mat-list-item>
+        <mat-icon>engineering</mat-icon>
+        <span>
+          {{ "nav.worker_login" | translate }}
+        </span>
+      </a>
+    <a href="/registerworker" *ngIf="!loggedIn" mat-list-item>
+      <mat-icon>group_add</mat-icon>
+      <span>{{'nav.register_worker' | translate}}</span>
+    </a>
       <a href="/myestates" *ngIf="loggedIn" mat-list-item>
         <mat-icon>apartment</mat-icon>
-        <span>{{ "nav.myestates" | translate }}</span></a>
+        <span>{{ "nav.myestates" | translate }}</span></a
+        >
         <a href="/myinvites" *ngIf="loggedIn && !admin" mat-list-item>
           <mat-icon>mark_email_read</mat-icon>
           <span>
-            {{'nav.accept_invite' | translate}}
+            {{ "nav.accept_invite" | translate }}
           </span>
         </a>
       <a href="/mypages" *ngIf="loggedIn && admin" mat-list-item>

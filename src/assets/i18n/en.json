@@ -91,11 +91,14 @@
     },
     "comment": {
       "send": "Send"
+    },
+    "register_worker": {
+      "already_have_code": "Already have a code?"
     }
   },
   "nav": {
     "login": "Admin Login",
-    "register": "Register",
+    "register": "Register Admin",
     "settings": {
       "language": "Language",
       "admin": "Admin settings"
@@ -104,7 +107,8 @@
     "mypages": "My Pages",
     "myestates": "Estates",
     "worker_login": "Worker Login",
-    "accept_invite": "Accept Invite"
+    "accept_invite": "Accept Invite",
+    "register_worker": "Register Worker"
   },
   "server": {
     "error": {
@@ -199,6 +203,12 @@
   "pages": {
     "comments": {
       "comment": "Comment"
+    }
+  },
+  "errors": {
+    "dialog": {
+      "failed_login": "Login failed",
+      "wrong_username_or_password": "Wrong username or password"
     }
   }
 }

@@ -17,6 +17,34 @@
       "opened": "Öppnad",
       "priority": "Prioritet",
       "title": "Titel"
+    },
+    "add": "Lägg till",
+    "confirm": {
+      "cancel": "Annullera",
+      "confirm": "Bekräfta",
+      "delete_estate": "Är du säker på att du vill ta bort denna egendom?",
+      "delete_task": "Är du säker på att du vill ta bort den här uppgiften?",
+      "mark_done": "Markera klar?",
+      "mark_done_desc": "Är du säker på att du vill markera den här uppgiften som klar?",
+      "mark_not_done": "Markera inte klar?",
+      "mark_not_done_desc": "Är du säker på att du vill avmarkera detta som klart?"
+    },
+    "error": {
+      "no_email_found": "Vi kunde inte hitta {{email}} i vår databas",
+      "wrong_email": "Fel email"
+    },
+    "select": {
+      "delete_estate": "Välj egendom att radera"
+    },
+    "take_task": {
+      "cost": "Kosta"
+    },
+    "title": {
+      "are_you_sure": "Är du säker?"
+    },
+    "worker": {
+      "transfer": "Överföra",
+      "worker": "Arbetstagare"
     }
   },
   "errors": {
@@ -26,15 +54,18 @@
     }
   },
   "nav": {
-    "login": "Logga in",
+    "login": "Admin inloggning",
     "logout": "Logga ut",
     "myestates": "Gods",
     "mypages": "Mina sidor",
-    "register": "Registrera",
+    "register": "Registrera Admin",
     "settings": {
       "admin": "Administratörsinställningar",
       "language": "Språk"
-    }
+    },
+    "accept_invite": "Acceptera inbjudan",
+    "worker_login": "Arbetarinloggning",
+    "register_worker": "Registrera arbetare"
   },
   "page": {
     "admin": {
@@ -49,7 +80,19 @@
     },
     "estate": {
       "delete": "Radera",
-      "update": "Uppdatera"
+      "update": "Uppdatera",
+      "add_worker": "Lägg till arbetare",
+      "comments": "Kommentarer",
+      "deadline": "Deadline",
+      "done": "Gjort",
+      "edit": "Redigera",
+      "no_task": "Inga uppgifter",
+      "not_done": "Ej gjort",
+      "remove_self": "Förverka",
+      "sort_deadline": "Deadline",
+      "sort_priority": "Prioritet",
+      "task_deleted": "Uppgiften har tagits bort",
+      "transfer_task": "Överföra"
     },
     "login": {
       "admin": "Admin inloggning",
@@ -87,18 +130,85 @@
       "register": "Registrera",
       "required_email": "E-post krävs",
       "unique_email": "E-posten är upptagen",
-      "valid_email": "Måste vara giltig e-postadress"
+      "valid_email": "Måste vara giltig e-postadress",
+      "worker_register": "Registrera dig som arbetare"
+    },
+    "comment": {
+      "send": "Skicka"
+    },
+    "comments": {
+      "cost": "Kosta",
+      "done": "Beräknat färdigställande",
+      "header_comment": "Kommentar",
+      "og_taskmaster": "Original taskmaster"
+    },
+    "confirmation": {
+      "check_inbox": "Kolla din inkorg"
+    },
+    "invites": {
+      "accept": "Acceptera",
+      "accept_with_code": "Acceptera inbjudan med kod",
+      "preview": "Förhandsvisning"
+    },
+    "myestates": {
+      "more_actions": "Fler åtgärder"
+    },
+    "worker_register": {
+      "firstname": "Förnamn",
+      "lastname": "Efternamn",
+      "phone": "Telefonnummer",
+      "submit": "Skicka in",
+      "worker": "Registrera arbetare"
+    },
+    "register_worker": {
+      "already_have_code": "Har du redan en kod?"
     }
   },
   "server": {
     "error": {
       "content": "Våra servrar är nere, försök att logga in senare",
-      "title": "Serverfel"
+      "title": "Serverfel",
+      "already_invited": "Arbetaren är redan inbjuden",
+      "duplicate_confirmationkey_content": "Du har redan en väntande bekräftelse",
+      "duplicate_confirmationkey_title": "Kolla din inkorg!",
+      "failed_login": "Inloggningen misslyckades",
+      "login_again_content": "Vänligen logga in igen",
+      "session_expired": "Sessionen löpte",
+      "wrong_username_or_password": "fel användarnamn eller lösenord"
     }
   },
   "snackbar": {
     "estate_added": "Egendom har lagts till",
     "task_added": "Uppgiften har lagts till",
-    "ok": "Ok"
+    "ok": "Ok",
+    "added_self": "Lade till dig själv i uppgiften",
+    "estate_deleted": "Dödsbo raderad",
+    "estate_updated": "Estate uppdaterad",
+    "removed_self": "Tog bort dig själv från uppgiften",
+    "task_deleted": "Uppgiften raderad",
+    "taskmaster_changed": "Arbetare har lagts till som uppgiftsadministratör",
+    "worker_invited": "Arbetare inbjuden"
+  },
+  "deadline": {
+    "none": "Ingen"
+  },
+  "email": {
+    "resend": "Skicka igen"
+  },
+  "pages": {
+    "comments": {
+      "comment": "Kommentar"
+    }
+  },
+  "priority": {
+    "asap": "så fort som möjligt",
+    "high": "Hög",
+    "low": "Låg",
+    "medium": "Medium",
+    "neutral": "Neutral",
+    "none": "Ingen",
+    "past": "Dåtid",
+    "very_high": "Väldigt högt",
+    "very_low": "Väldigt låg"
   }
 }

@@ -1,21 +1,27 @@
-<mat-form-field class="register-form-field">
-  <mat-label>
-    {{ "page.register.email" | translate }}
-  </mat-label>
-
-  <input [(ngModel)]="emailValue" type="text" matInput />
-
-  <button
-    *ngIf="emailValue"
-    (click)="emailValue = ''"
-    type="button"
-    matSuffix
-    mat-icon-button
-    tabindex="-1"
-  >
-    <mat-icon>clear</mat-icon>
-  </button>
-</mat-form-field>
-
-<button (click)="login()" mat-raised-button color="primary">{{ "page.login.login" | translate }}</button>
-<button (click)="resend()" mat-raised-button color="primary">{{'email.resend' | translate}}</button>
+<div class="form">
+  <mat-form-field class="register-form-field">
+    <mat-label>
+      {{ "page.register.email" | translate }}
+    </mat-label>
+  
+    <input [(ngModel)]="emailValue" type="text" matInput />
+  
+    <button
+      *ngIf="emailValue"
+      (click)="emailValue = ''"
+      type="button"
+      matSuffix
+      mat-icon-button
+      tabindex="-1"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="form-footer">
+    <div class="email-actions">
+      <button (click)="login()" mat-raised-button color="primary">{{ "page.login.login" | translate }}</button>
+      <button (click)="resend()" mat-raised-button color="primary">{{'email.resend' | translate}}</button>
+    </div>
+    <a href="/confirmation/login" mat-raised-button color="accent">{{'page.register_worker.already_have_code' | translate}}</a>
+  </div>
+</div>

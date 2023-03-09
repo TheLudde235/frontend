@@ -1,0 +1,24 @@
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  mat-form-field {
+    width: 70%;
+    margin: 100px auto 0;
+  }
+  .form-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .email-actions {
+        margin: auto;
+        display: flex;
+        gap: 10px;
+    }
+    button,
+    a {
+      margin: auto;
+      width: fit-content;
+    }
+  }
+}

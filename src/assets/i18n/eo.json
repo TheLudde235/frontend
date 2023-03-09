@@ -17,6 +17,34 @@
       "opened": "Malfermita",
       "priority": "Prioritato",
       "title": "Titolo"
+    },
+    "add": "Aldoni",
+    "confirm": {
+      "cancel": "Nuligi",
+      "confirm": "Konfirmu",
+      "delete_estate": "Ĉu vi certas, ke vi volas forigi ĉi tiun bienon?",
+      "delete_task": "Ĉu vi certas, ke vi volas forigi ĉi tiun taskon?",
+      "mark_done": "Marko farita?",
+      "mark_done_desc": "Ĉu vi certas, ke vi volas marki ĉi tiun taskon kiel farita?",
+      "mark_not_done": "Marko ne faris?",
+      "mark_not_done_desc": "Ĉu vi certas, ke vi volas malmarki ĉi tion kiel faritan?"
+    },
+    "error": {
+      "no_email_found": "Ni ne povis trovi {{ retpoŝton }} en nia datumbazo",
+      "wrong_email": "Malĝusta retpoŝto"
+    },
+    "select": {
+      "delete_estate": "Elektu bienon por forigi"
+    },
+    "take_task": {
+      "cost": "Kosto"
+    },
+    "title": {
+      "are_you_sure": "Ĉu vi certas?"
+    },
+    "worker": {
+      "transfer": "Translokigo",
+      "worker": "Laboristo"
     }
   },
   "errors": {
@@ -26,15 +54,18 @@
     }
   },
   "nav": {
-    "login": "Ensaluti",
+    "login": "Admin Ensaluto",
     "logout": "Elsaluti",
     "myestates": "Biendomoj",
     "mypages": "Miaj Paĝoj",
-    "register": "Registru",
+    "register": "Registru Admin",
     "settings": {
       "admin": "Administraj agordoj",
       "language": "Lingvo"
-    }
+    },
+    "accept_invite": "Akceptu Inviton",
+    "worker_login": "Ensaluto de Laboristo",
+    "register_worker": "Registri Laboriston"
   },
   "page": {
     "admin": {
@@ -49,7 +80,19 @@
     },
     "estate": {
       "delete": "Forigi",
-      "update": "Ĝisdatigo"
+      "update": "Ĝisdatigo",
+      "add_worker": "Aldonu Laboriston",
+      "comments": "Komentoj",
+      "deadline": "Limdato",
+      "done": "Farita",
+      "edit": "Redakti",
+      "no_task": "Neniuj Taskoj",
+      "not_done": "Ne farita",
+      "remove_self": "Forfari",
+      "sort_deadline": "Limdato",
+      "sort_priority": "Prioritato",
+      "task_deleted": "Tasko estis forigita",
+      "transfer_task": "Translokigo"
     },
     "login": {
       "admin": "Admin Ensaluto",
@@ -87,18 +130,85 @@
       "register": "Registru",
       "required_email": "Retpoŝto estas postulata",
       "unique_email": "Retpoŝto estas okupata",
-      "valid_email": "Devas esti valida retpoŝto"
+      "valid_email": "Devas esti valida retpoŝto",
+      "worker_register": "Registru kiel laboristo"
+    },
+    "comment": {
+      "send": "Sendu"
+    },
+    "comments": {
+      "cost": "Kosto",
+      "done": "Laŭtaksa kompletigo",
+      "header_comment": "Komento",
+      "og_taskmaster": "Origina taskestro"
+    },
+    "confirmation": {
+      "check_inbox": "Kontrolu vian enirkeston"
+    },
+    "invites": {
+      "accept": "Akceptu",
+      "accept_with_code": "Akceptu Inviton kun kodo",
+      "preview": "Antaŭrigardo"
+    },
+    "myestates": {
+      "more_actions": "Pli da agoj"
+    },
+    "worker_register": {
+      "firstname": "Antaŭnomo",
+      "lastname": "Familia nomo",
+      "phone": "Telefonnumero",
+      "submit": "Submeti",
+      "worker": "Registri Laboriston"
+    },
+    "register_worker": {
+      "already_have_code": "Ĉu jam havas kodon?"
     }
   },
   "server": {
     "error": {
       "content": "Niaj serviloj malfunkcias, bonvolu provi ensaluti poste",
-      "title": "Servila eraro"
+      "title": "Servila eraro",
+      "already_invited": "Laboristo jam estas invitita",
+      "duplicate_confirmationkey_content": "Vi jam havas atenditan konfirmon",
+      "duplicate_confirmationkey_title": "Kontrolu vian enirkeston!",
+      "failed_login": "Ensaluto malsukcesis",
+      "login_again_content": "Bonvolu ensaluti denove",
+      "session_expired": "Sesio eksvalidiĝis",
+      "wrong_username_or_password": "Malĝusta uzantnomo aŭ pasvorto"
     }
   },
   "snackbar": {
     "estate_added": "Biendomo aldonita sukcese",
     "ok": "Bone",
-    "task_added": "Tasko aldonita sukcese"
+    "task_added": "Tasko aldonita sukcese",
+    "added_self": "Aldonis vin al tasko",
+    "estate_deleted": "Biendomo forigita",
+    "estate_updated": "Biendomo ĝisdatigita",
+    "removed_self": "Forigis vin de tasko",
+    "task_deleted": "Tasko forigita",
+    "taskmaster_changed": "Laboristo aldonita kiel taskadmin",
+    "worker_invited": "Laboristo invitita"
+  },
+  "deadline": {
+    "none": "Neniu"
+  },
+  "email": {
+    "resend": "Resendi"
+  },
+  "pages": {
+    "comments": {
+      "comment": "Komento"
+    }
+  },
+  "priority": {
+    "asap": "plejeble baldaŭ",
+    "high": "Alta",
+    "low": "Malalta",
+    "medium": "Meza",
+    "neutral": "Neŭtrala",
+    "none": "Neniu",
+    "past": "Pasinteco",
+    "very_high": "Tre Alta",
+    "very_low": "Tre Malalta"
   }
 }

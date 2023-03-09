@@ -135,5 +135,8 @@
     </mat-form-field>
 
 </div>
-    <button type="submit" mat-raised-button color="primary" disabled="{{!worker.email || !worker.phone || !worker.firstname || !worker.lastname || !formIsDone()}}">{{'page.worker_register.submit' | translate}}</button>
+<div class="form-footer">
+  <button type="submit" mat-raised-button color="primary" disabled="{{!worker.email || !worker.phone || !worker.firstname || !worker.lastname || !formIsDone()}}">{{'page.worker_register.submit' | translate}}</button>
+  <a href="confirmation/worker" mat-raised-button color="primary">{{'page.register_worker.already_have_code' | translate}}</a>
+</div>
 </form>
