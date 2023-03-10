@@ -15,3 +15,9 @@ It also has PWA support by using angular PWA
 - Scss: CSS pre-processor
 - NGX-translate: i18n Translation support
 - Angular Router: Routing
+
+
+## Hosting
+The backend is hosted on [render](https://render.com/) and frontend on [cloudflare pages](https://pages.cloudflare.com/)
+
+The project is live at [this link](https://taxami.pages.dev/)
