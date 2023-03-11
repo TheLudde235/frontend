@@ -10,35 +10,56 @@ import { initialState } from '../store/reducers/session.reducer';
 import { Token } from '../data-types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private token: string | undefined;
   private expTimer: number | undefined;
 
-  constructor(private store: Store<{session: Session}>, private _httpClient: HttpClient, private _jwtService: JWTService) {
-    store.select('session').subscribe(s => this.token = s.token)
+  constructor(
+    private store: Store<{ session: Session }>,
+    private _httpClient: HttpClient,
+    private _jwtService: JWTService
+  ) {
+    store.select('session').subscribe((s) => (this.token = s.token));
   }
 
   getToken = () => this.token;
 
-  public adminLogin(username: string, password: string): Observable<any> { 
-      return this._httpClient.post<any>(environment.endpoint + 'login', {
+  public adminLogin(username: string, password: string): Observable<any> {
+    return this._httpClient
+      .post<any>(environment.endpoint + 'login', {
         username,
-        password
-      }).pipe(
+        password,
+      })
+      .pipe(
         catchError((err, caught) => {
-          return of(err) ?? caught
+          return of(err) ?? caught;
         }),
-        map(data => {
-          if (data.ok !== undefined && data.ok === false) return {err: true, status: data.status, message: data.error.msg};
-          return this.store.dispatch(new SetSession({...initialState, ...this._jwtService.getData(data.token), loggedIn: true, token: data.token}));
+        map((data) => {
+          if (data.ok !== undefined && data.ok === false)
+            return { err: true, status: data.status, message: data.error.msg };
+          return this.store.dispatch(
+            new SetSession({
+              ...initialState,
+              ...this._jwtService.getData(data.token),
+              loggedIn: true,
+              token: data.token,
+            })
+          );
         })
-      )
+      );
   }
 
-  public workerLogin(token: string): void {
-    this.store.dispatch(new SetSession({...initialState, ...this._jwtService.getData(token), loggedIn: true, token: token}))
+  public tokenLogin(token: string): void {
+    this.store.dispatch(
+      new SetSession({
+        ...initialState,
+        ...this._jwtService.getData(token),
+        loggedIn: true,
+        token: token,
+      })
+    );
   }
 
   public logout() {

@@ -91,7 +91,7 @@ export class MyestatesComponent {
     dialogRef.afterClosed().subscribe(dialogData => {
       if (!dialogData) return;
       const { title, priority, deadline, open, description } = dialogData
-      this._httpClient.post(environment.endpoint + 'task/' + estateuuid, { title, priority, deadline, open, description }).subscribe(console.log);
+      this._httpClient.post(environment.endpoint + 'task/' + estateuuid, { title, priority, deadline, open, description }).subscribe();
     });
   }
 

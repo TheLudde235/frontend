@@ -20,9 +20,7 @@ export class ConfirmationComponent implements OnInit {
     private _httpClient: HttpClient,
     private route: ActivatedRoute,
     private _router: Router,
-    private _store: Store,
-    private _authService: AuthService,
-    private _jwt: JWTService
+    private _authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -41,7 +39,7 @@ export class ConfirmationComponent implements OnInit {
       this._httpClient.get<any>(url.toString()).subscribe((data) => {
         if (data) {
           this._router.navigateByUrl('/');
-          this._store.dispatch(new SetSession({...initialState, ...this._jwt.getData(data.token), loggedIn: true, token: data.token}))
+          this._authService.tokenLogin(data.token);
         }
       });
     } else {
@@ -49,8 +47,7 @@ export class ConfirmationComponent implements OnInit {
         .get<any>(environment.endpoint + 'confirmMail/' + this.code)
         .subscribe((data) => {
           if (data) this._router.navigateByUrl('/');
-          localStorage.setItem('tempToken', JSON.stringify(data));
-          this._authService.workerLogin(data.token)
+          this._authService.tokenLogin(data.token);
         });
     }
   }

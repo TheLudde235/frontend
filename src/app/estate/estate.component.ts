@@ -45,7 +45,6 @@ export class EstateComponent implements OnInit {
     private store: Store<{ session: Session }>
   ) {
     store.select('session').subscribe((session) => {
-      console.log(session);
       this.isAdmin = session.admin;
       this.useruuid = session.uuid;
     });
@@ -421,7 +420,9 @@ export class EstateComponent implements OnInit {
           .subscribe((res) => {
             this._httpClient
               .post(environment.endpoint + 'comment/' + taskuuid, {
-                text: `>!<${data.time.toISOString()}>!<${data.cost}>!<${data.comment}`,
+                text: `>!<${data.time.toISOString()}>!<${data.cost}>!<${
+                  data.comment
+                }`,
               })
               .subscribe((r) => {
                 forkJoin([
@@ -437,7 +438,7 @@ export class EstateComponent implements OnInit {
   }
 
   updatePrelimTask(taskuuid: string) {
-this._dialog
+    this._dialog
       .open(DialogTakeTaskComponent, {
         data: {
           time: '',
@@ -455,7 +456,9 @@ this._dialog
           .subscribe((res) => {
             this._httpClient
               .post(environment.endpoint + 'comment/' + taskuuid, {
-                text: `>!<${data.time.toISOString()}>!<${data.cost}>!<${data.comment}`,
+                text: `>!<${data.time.toISOString()}>!<${data.cost}>!<${
+                  data.comment
+                }`,
               })
               .subscribe((r) => {
                 forkJoin([

@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
       this.loading = false;
       if (data && data.err) {
         if (data.status === 0) {
-          console.log(data);
           forkJoin([
             this._translateService.get('server.error.title'),
             this._translateService.get('server.error.content')

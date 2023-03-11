@@ -1,16 +1,28 @@
 <app-loading-spinner [loading]="loading"></app-loading-spinner>
 <ng-container *ngIf="session$ | async as session">
   <h1>{{ "page.mypages.welcome" | translate }} {{ session.username }}!</h1>
-  <div class="buttons">
-    <a href="/myestates" mat-raised-button color="primary">
-      <mat-icon> apartment </mat-icon>
-      {{ "page.mypages.estates" | translate }}</a
+  <div class="actions">
+    <div class="estate-actions">
+      <a href="/myestates" class="button" mat-raised-button color="primary">
+        <mat-icon> apartment </mat-icon>
+        {{ "page.mypages.estates" | translate }}</a
+      >
+      <button
+        (click)="openEstateDialog()"
+        class="button"
+        mat-raised-button
+        color="accent"
+      >
+        <mat-icon> add </mat-icon>
+        {{ "page.mypages.add_estate" | translate }}
+      </button>
+    </div>
+    <button
+      (click)="openAddTaskDialog()"
+      class="button"
+      mat-raised-button
+      color="accent"
     >
-    <button mat-raised-button color="accent" (click)="openEstateDialog()">
-      <mat-icon> add </mat-icon>
-      {{ "page.mypages.add_estate" | translate }}
-    </button>
-    <button mat-raised-button color="accent" (click)="openAddTaskDialog()">
       <mat-icon> add </mat-icon>
       {{ "page.mypages.add_task" | translate }}
     </button>

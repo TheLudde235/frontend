@@ -15,16 +15,16 @@ import { CommentsComponent } from './comments/comments.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
   { path: 'confirmation/:type', component: ConfirmationComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'registerworker', component: RegisterWorkerComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'workerlogin', component: WorkerloginComponent },
   { path: 'myinvites', component: InvitesComponent },
   { path: 'myestates', canActivate: [UserGuard], component: MyestatesComponent },
-  { path: 'mypages', canActivate: [AdminGuard], component: MypagesComponent },
   { path: 'estate/:estateuuid', canActivate: [UserGuard], component: EstateComponent },
   { path: 'comments/:taskuuid', canActivate: [UserGuard], component: CommentsComponent },
-  { path: 'registerworker', component: RegisterWorkerComponent },
+  { path: 'mypages', canActivate: [AdminGuard], component: MypagesComponent },
   { path: '**', redirectTo: '' }
 ];
 
