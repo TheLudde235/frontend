@@ -1,27 +1,23 @@
-# Frontend
+# Grading project, Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.1.
+Frontend client for Ludvig Lagerströms grading project 
 
-## Development server
+## Overview
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The frontend is written in TypeScript with the Angular framework
 
-## Code scaffolding
+It also has PWA support by using angular PWA
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Technologies
 
-## Build
+- Angular Material UI: Pre-styled elements
+- NgRx Store: State management
+- Scss: CSS pre-processor
+- NGX-translate: i18n Translation support
+- Angular Router: Routing
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Hosting
+The backend is hosted on [render](https://render.com/) and frontend on [cloudflare pages](https://pages.cloudflare.com/)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+The project is live at [this link](https://taxami.pages.dev/)
