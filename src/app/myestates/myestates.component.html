@@ -11,7 +11,7 @@
     <mat-icon>refresh</mat-icon>
   </button>
   <div class="estates" *ngIf="estates$ | async as estates; else loader">
-    <div class="estate" *ngFor="let estate of estates$">
+    <div class="estate" *ngFor="let estate of estates">
       <a href="/estate/{{ estate.estateuuid }}">
         <h2>{{ estate.city }}, {{ estate.street }}</h2>
       </a>
