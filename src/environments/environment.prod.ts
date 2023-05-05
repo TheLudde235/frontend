@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  endpoint: 'https://betygprojektbackend.onrender.com/'
+  endpoint: 'https://taxamibackend.theludde235.se/'
 };
