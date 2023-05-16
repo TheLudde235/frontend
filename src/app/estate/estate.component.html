@@ -39,7 +39,7 @@
     <hr />
   </div>
   <div class="tasks">
-    <div class="tasks-actions">
+    <div class="estate-actions">
       <button
         mat-raised-button
         (click)="prioritySort = true; sort(true)"
@@ -129,7 +129,23 @@
           </p>
         </div>
       </div>
-      <button
+      <div class="task-actions">
+        <a href="/comments/{{task.taskuuid}}" mat-raised-button color="primary">
+          {{ "page.estate.comments" | translate }}
+        </a>
+        <button
+          mat-raised-button
+          color="{{ task.completed ? 'accent' : 'warn' }}"
+          *ngIf="isAdmin || task.taskmaster == useruuid"
+          (click)="toggleDone(task)"
+        >
+          {{
+            (task.completed ? "page.estate.done" : "page.estate.not_done")
+              | translate
+          }}
+          <mat-icon *ngIf="task.completed">done</mat-icon>
+          <mat-icon *ngIf="!task.completed">close</mat-icon>
+        </button><button
         mat-icon-button
         class="task-settings"
         *ngIf="!isAdmin && task.open && !task.taskmaster"
@@ -176,23 +192,6 @@
         {{'page.estate.update_prelim' | translate}}
         </button>
       </mat-menu>
-      <div class="task-actions">
-        <a href="/comments/{{task.taskuuid}}" mat-raised-button color="primary">
-          {{ "page.estate.comments" | translate }}
-        </a>
-        <button
-          mat-raised-button
-          color="{{ task.completed ? 'accent' : 'warn' }}"
-          *ngIf="isAdmin || task.taskmaster == useruuid"
-          (click)="toggleDone(task)"
-        >
-          {{
-            (task.completed ? "page.estate.done" : "page.estate.not_done")
-              | translate
-          }}
-          <mat-icon *ngIf="task.completed">done</mat-icon>
-          <mat-icon *ngIf="!task.completed">close</mat-icon>
-        </button>
       </div>
     </div>
   </div>

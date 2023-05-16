@@ -10,7 +10,7 @@
     scale: 1.5;
   }
 }
-.tasks-actions {
+.estate-actions {
   position: relative;
   display: flex;
   align-items: center;
@@ -30,9 +30,9 @@
   position: relative;
 
   .task-settings {
-    position: absolute;
-    right: 15px;
-    bottom: 15px;
+    // position: absolute;
+    // right: 15px;
+    // bottom: 15px;
   }
   .task-info {
     background-color: #333;
@@ -132,9 +132,10 @@
 }
 
 .task-actions {
-  justify-content: space-between;
-  max-width: 250px;
+  width: 100%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .no-task {

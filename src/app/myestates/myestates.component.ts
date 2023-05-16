@@ -12,7 +12,7 @@ import { DialogConfirmComponent } from '../dialogs/dialog-confirm/dialog-confirm
 import { DialogEstateComponent } from '../dialogs/dialog-estate/dialog-estate.component';
 import { DialogOkComponent } from '../dialogs/dialog-ok/dialog-ok.component';
 import { DialogTaskComponent } from '../dialogs/dialog-task/dialog-task.component';
-import { ResetSession, UpdateSession } from '../store/actions/session.actions';
+import { ResetSession } from '../store/actions/session.actions';
 import { Session } from '../store/models/runtime';
 
 @Component({
